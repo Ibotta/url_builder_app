@@ -2,13 +2,19 @@
 
 # URL Builder App
 
+## TODOs:
+1. Have Legal look over the LICENSE.
+2. Add useful documentation to the Wiki.
+3. Add a build tag from Travis?
+4. Code Coverage check?
+
 ## Description:
 
 A Zendesk App to help you generate links for agents.
 
 ## Instructions:
 
-1. Download a [.zip of this app](https://github.com/zendesklabs/url_builder_app/archive/master.zip)
+1. Download a [.zip of this app](https://github.com/ibotta/url_builder_app/archive/master.zip)
 2. Navigate to your Zendesk Admin's Apps -> Manage page
 3. Click `Upload App`
 4. Enter a descriptive name of your choosing, and upload this .zip
@@ -46,7 +52,7 @@ This example will generate the following HTML inside the app:
   </li>
 </ul>
 ```
-FIX THESE
+
 ----
 ### Available Placeholders
 * {{ticket.id}} //not available for new tickets
@@ -81,10 +87,12 @@ If you wish to change the output, locate the app by looking for the name you cho
 
 <img width="195" src="https://github.com/watchmanmonitoring/url_builder_app/raw/master/assets/app-settings-change.png" />
 
+## Issues
+To submit an issue, please follow the [available template](/.github/ISSUE_TEMPLATE).
 
 ## Contribution
 
-Improvements are always welcome. To contribute, please submit detailed Pull Requests.
+Improvements are always welcome. To contribute, please submit detailed Pull Requests following the [guidelines](/.github/CONTRIBUTING.md).
 
 ## Screenshot(s):
 ![screenshot-1](/assets/screenshot.png)
