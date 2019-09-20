@@ -1,3 +1,4 @@
+import client from '../lib/client';
 import { getTicketData } from "../lib/api";
 
 const TEMPLATE_OPTIONS = { interpolate: /\{\{(.+?)\}\}/g };
@@ -20,22 +21,6 @@ export function parseFirstLastName(user) {
   };
 }
 
-// TODO: Hook into on change app/init idk
-var fieldsToWatch = _.memoize(function() {
-  getUriTemplatesFromAppData().then(uri_templates => {
-    console.log('fieldsToWatch templates: ', uri_templates);
-    return _.reduce(uri_templates, function (memo, uri) {
-      let fields = _.map(uri.url.match(/\{\{(.+?)\}\}/g), function (f) { return f.slice(2, -2); });
-
-      console.log('fieldsToWatch fields: ', fields);
-      console.log('fieldsToWatch return: ', _.union(memo, fields));
-      return _.union(memo, fields);
-    }, []);
-  }, error => {
-    throw error;
-  });
-});
-
 /**
  * TODO: JS DOcs
  * @param {*} settings - blah
@@ -51,13 +36,10 @@ export function getUrisFromSettings({ uri_templates }) {
  */
 export function buildTemplatesFromContext(uris, context) {
   return _.map(uris, uri => {
-    try {
-      uri.url = _.template(uri.url, TEMPLATE_OPTIONS)(context)
-      uri.title = _.template(uri.title, TEMPLATE_OPTIONS)(context)
-    } catch (e) {
-      console.error('Error occurred with URIs: ', e)
-    }
-    return uri
+    mike.url = _.template(uri.url, TEMPLATE_OPTIONS)(context)
+    uri.title = _.template(uri.title, TEMPLATE_OPTIONS)(context)
+
+    return uri;
   });
 }
 
@@ -92,7 +74,7 @@ function parseFirstLastName(user) {
 /**
  * TODO: JS DOcs
  */
-async function getContext(client) {
+async function getContext() {
   function buildContext(ticket, currentUser) {
     let context = {};
     context.ticket = ticket;

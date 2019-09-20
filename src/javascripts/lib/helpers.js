@@ -1,3 +1,6 @@
+import client from '../lib/client';
+import getErrorTemplate from '../../templates/error';
+
 /**
  * Resize App Container
  *
@@ -7,12 +10,13 @@
  * @param {...Object} dimensions - an optional param to override
  *                                 automatic size calculation
  */
-export function resizeAppContainer (client, dimensions) {
+export function resizeAppContainer (dimensions) {
   if (dimensions) {
     return client.invoke('resize', { ...dimensions })
   }
 
   const { clientHeight } = document.getElementById('app');
+
   return client.invoke('resize', { height: clientHeight });
 }
 
@@ -60,4 +64,27 @@ export function escapeSpecialChars (str) {
   }
 
   return str.replace(/[&<>"'`=]/g, function (m) { return escape[m] })
+}
+
+export function renderErrorTemplate(error) {
+  console.error(error);
+
+  render('.loader', getErrorTemplate(error));
+  return resizeAppContainer();
+}
+
+export function errorHandler(func, ...params) {
+  try {
+    return func(...params);
+  } catch (err) {
+    renderErrorTemplate(err);
+  }
+}
+
+export async function asyncErrorHandler(asyncFunction, ...params) {
+  try {
+    return await asyncFunction(...params);
+  } catch (err) {
+    renderErrorTemplate(err);
+  }
 }

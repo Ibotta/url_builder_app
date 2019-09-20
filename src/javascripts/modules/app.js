@@ -3,15 +3,13 @@
  **/
 
 import I18n from '../../javascripts/lib/i18n'
-import { resizeAppContainer, render } from '../../javascripts/lib/helpers'
+import { resizeAppContainer, render, asyncErrorHandler, errorHandler } from '../../javascripts/lib/helpers'
 import getDefaultTemplate from '../../templates/default'
 import getContext, { buildTemplatesFromContext, getUrisFromSettings } from './context'
 
 class App {
-  constructor (client, appData) {
-    this.client = client
+  constructor (appData) {
     this.settings = appData.metadata.settings;
-
     this.init();
     /*
       // this.initializePromise is only used in testing
@@ -24,9 +22,9 @@ class App {
    * Initialize module, render main template
    */
   async init () {
-    const uris = await getUrisFromSettings(this.settings);
-    const context = await getContext(this.client);
-    const templates = buildTemplatesFromContext(uris, context);
+    const uris = await asyncErrorHandler(getUrisFromSettings, this.settings);
+    const context = await asyncErrorHandler(getContext);
+    const templates = errorHandler(buildTemplatesFromContext, uris, context);
 
     return this.renderTemplates(templates);
   }
@@ -35,13 +33,6 @@ class App {
     render('.loader', getDefaultTemplate(templates))
 
     return resizeAppContainer(this.client);
-  }
-  /**
-   * Handle error
-   * @param {Object} error error object
-   */
-  _handleError (error) {
-    console.log('An error is handled here: ', error.message)
   }
 }
 

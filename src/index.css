@@ -1,11 +1,25 @@
 .main {
   height: 100%;
+  min-height: 100%;
   vertical-align: middle;
 }
 
 .loader {
   display: block;
   margin: auto;
+  width: 25%;
+  height: 25%;
+}
+
+.error {
+  display: block;
+  margin: auto;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  overflow-y: hidden;
+}
+
+.error > img {
   width: 25%;
   height: 25%;
 }
@@ -26,5 +40,9 @@
 
 #app {
   height: 100%;
+  overflow: hidden;
+}
+
+html {
   overflow: hidden;
 }
