@@ -41,6 +41,10 @@ function assignTicketFields(ticket, ticketFields) {
   return ticketCopy;
 }
 
+/**
+ * TODO: JS Docs
+ * @param {*} user 
+ */
 async function processUserObject(user) {
   const [firstName = '', lastName = ''] = (user.name || '').split(' ');
   const { user: {user_fields}} = await client.request(getUserData(user.id));
