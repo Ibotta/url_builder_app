@@ -12,7 +12,7 @@ function uriMarkup (uri) {
 
 export default function (templateUris) {
   return (`
-    <div class="well well-small">
+    <div id="well-urls" class="well well-small">
       <ul class="btn-list">${loop(templateUris, uriMarkup)}</ul>
     </div>
   `);

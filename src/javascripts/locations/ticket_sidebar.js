@@ -1,7 +1,7 @@
 import App from '../modules/app'
+import client from '../lib/client';
+import { errorHandler } from '../lib/helpers';
 
-/* global ZAFClient */
-const client = ZAFClient.init()
 let fieldsToWatch = [];
 let app = {};
 
@@ -15,9 +15,9 @@ function getFieldsToWatchFromSettings({ uri_templates }) {
 // TODO: Check out appData
 client.on('app.registered', appData => {
   app = appData;
-  fieldsToWatch = getFieldsToWatchFromSettings(appData.metadata.settings);
+  fieldsToWatch = errorHandler(getFieldsToWatchFromSettings, appData.metadata.settings);
 
-  return new App(client, appData)
+  return new App(appData);
 });
 
 
@@ -25,8 +25,8 @@ client.on('app.registered', appData => {
 // Reinitialize app
 // TODO: Test on changed event
 client.on('*.changed', e => {
-  if (_.contains(fieldsToWatch(), e.propertyName)) {
-    return new App(client, app);
+  if (_.contains(fieldsToWatch, e.propertyName)) {
+    return new App(app);
   }
 });
 
