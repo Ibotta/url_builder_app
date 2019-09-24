@@ -1,25 +1,9 @@
 import client from '../lib/client';
 import { getTicketData } from "../lib/api";
+import { getUserData } from "../lib/api";
+import { getOrganizationData } from "../lib/api";
 
 const TEMPLATE_OPTIONS = { interpolate: /\{\{(.+?)\}\}/g };
-
-/**
- * Parses a Zendesk users first and last name
- * from their Full name
- *
- * TODO: Docz
- *
- * @param {Object} user - A Zendesk User Object
- */
-export function parseFirstLastName(user) {
-  const [first_name = '', last_name = ''] = (user.name || '').split(' ');
-
-  return {
-    ...user,
-    first_name,
-    last_name,
-  };
-}
 
 /**
  * TODO: JS DOcs
@@ -36,7 +20,7 @@ export function getUrisFromSettings({ uri_templates }) {
  */
 export function buildTemplatesFromContext(uris, context) {
   return _.map(uris, uri => {
-    mike.url = _.template(uri.url, TEMPLATE_OPTIONS)(context)
+    uri.url = _.template(uri.url, TEMPLATE_OPTIONS)(context)
     uri.title = _.template(uri.title, TEMPLATE_OPTIONS)(context)
 
     return uri;
@@ -58,16 +42,18 @@ function assignTicketFields(ticket, ticketFields) {
 }
 
 /**
- * TODO: JS DOcs
+ * TODO: JS Docs
  * @param {*} user 
  */
-function parseFirstLastName(user) {
-  const [first_name = '', last_name = ''] = (user.name || '').split(' ');
+async function processUserObject(user) {
+  const [firstName = '', lastName = ''] = (user.name || '').split(' ');
+  const { user: {user_fields}} = await client.request(getUserData(user.id));
 
   return {
     ...user,
-    first_name,
-    last_name,
+    firstName,
+    lastName,
+    user_fields
   };
 }
 
@@ -75,29 +61,19 @@ function parseFirstLastName(user) {
  * TODO: JS DOcs
  */
 async function getContext() {
-  function buildContext(ticket, currentUser) {
+  async function buildContext(ticket, currentUser) {
     let context = {};
     context.ticket = ticket;
 
     if (ticket.requester.id) {
-      context.ticket.requester = parseFirstLastName(ticket.requester);
-
-      /*
-        // TODO: Look into organizations
-        // this should be ticket.requester.organization_id
-        if (context.ticket.requester.organization_id) {
-          context.ticket.organization = _.find(data.organizations, org => {
-            return org.id = context.ticket.requester.organization_id;
-          });
-        }
-       */
+      context.ticket.requester = await processUserObject(ticket.requester);
     }
 
-    if (ticket.assignee.id) {
-      context.ticket.assignee.user = parseFirstLastName(ticket.assignee);
+    if (ticket.assignee.user.id) {
+      context.ticket.assignee.user = await processUserObject(ticket.assignee.user);
     }
 
-    context.current_user = parseFirstLastName(currentUser);
+    context.currentUser = await processUserObject(currentUser);
 
     return context;
   };
@@ -106,9 +82,14 @@ async function getContext() {
   let { ticket } = await client.get('ticket');
   const ticketFields = await client.request(getTicketData(ticket.id));
 
+  if (ticket.organization) {
+    const { organization } = await client.request(getOrganizationData(ticket.organization.id));
+    ticket.organization.organization_fields = organization.organization_fields;
+  }
+
   ticket = assignTicketFields(ticket, ticketFields);
 
-  return buildContext(ticket, currentUser)
+  return await buildContext(ticket, currentUser)
 }
 
 export default getContext;

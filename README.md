@@ -61,25 +61,25 @@ This example will generate the following HTML inside the app:
 * {{ticket.requester.name}}
 * {{ticket.requester.email}}
 * {{ticket.requester.externalId}}
-* {{ticket.requester.firstname}}
-* {{ticket.requester.lastname}}
+* {{ticket.requester.firstName}}
+* {{ticket.requester.lastName}}
 * {{ticket.requester.user_fields.YYY}} = custom user fields can be used
 * {{ticket.assignee.user.id}}
 * {{ticket.assignee.user.name}}
 * {{ticket.assignee.user.email}}
 * {{ticket.assignee.user.externalId}}
-* {{ticket.assignee.user.firstname}}
-* {{ticket.assignee.user.lastname}}
+* {{ticket.assignee.user.firstName}}
+* {{ticket.assignee.user.lastName}}
 * {{ticket.assignee.group.id}}
 * {{ticket.assignee.group.name}}
 * {{ticket.custom_field_XXXXXXX}} // XXXXXXX = custom field id
 * {{ticket.organization.organization_fields.XXXXXXX}} // XXXXXXX = Field key, default is field name
 * {{currentUser.id}}
-* {{current_user.name}}
-* {{current_user.email}}
-* {{current_user.externalId}}
-* {{current_user.firstname}}
-* {{current_user.lastname}}
+* {{currentUser.name}}
+* {{currentUser.email}}
+* {{currentUser.externalId}}
+* {{currentUser.firstName}}
+* {{currentUser.lastName}}
 
 ### Making changes
 
