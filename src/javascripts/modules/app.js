@@ -10,12 +10,10 @@ import getContext, { buildTemplatesFromContext, getUrisFromSettings } from './co
 class App {
   constructor (appData) {
     this.settings = appData.metadata.settings;
-    this.init();
-    /*
-      // this.initializePromise is only used in testing
-      // indicate app initilization(including all async operations) is complete
-      this.initializePromise = this.init()
-    */
+
+    // this.initializePromise is only used in testing
+    // indicate app initilization(including all async operations) is complete
+    this.initializePromise = this.init()
   }
 
   /**

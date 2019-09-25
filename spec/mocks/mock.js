@@ -14,7 +14,13 @@ export const CLIENT = {
     })
   }
 }
-
+export const APP_DATA = {
+  metadata: {
+    settings: {
+      uri_templates: "[]"
+    }
+  }
+}
 export const ORGANIZATIONS = {
   organizations: [
     { name: 'Organization A' },

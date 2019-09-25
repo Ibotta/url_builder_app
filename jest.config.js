@@ -10,5 +10,6 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '<rootDir>/spec'
   ],
+  setupTestFrameworkScriptFile: "<rootDir>setupTests.js",
   roots: ['./spec']
 }
