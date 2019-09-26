@@ -37,7 +37,7 @@ if (!document.createRange) {
   createRangePolyfill()
 }
 
-describe('Example App', () => {
+describe('App Initialization', () => {
   let errorSpy
   let app
 
@@ -50,11 +50,14 @@ describe('Example App', () => {
       app = new App(APP_DATA);
       errorSpy = jest.spyOn(helpers, 'asyncErrorHandler');
 
-      app.initializePromise.catch(() => done());
-    })
+      app.initializePromise
+      .then(() => done())
+      .catch(() => done());
+    });
 
     it('should display an error when no templates are input', () => {
-      expect(errorSpy).toBeCalled()
+      expect(errorSpy).toBeCalled();
+      expect(document.querySelector('.error')).not.toBe(null)
     })
   })
 
@@ -74,7 +77,7 @@ describe('Example App', () => {
     })
 
     it('should render main stage with data', () => {
-      expect(document.querySelector('.app')).not.toBe(null)
+      expect(document.querySelector('#app')).not.toBe(null)
     })
   })
 })

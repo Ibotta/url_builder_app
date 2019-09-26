@@ -42,7 +42,9 @@ export function render (replacedNodeSelector, htmlString) {
   const fragment = document.createRange().createContextualFragment(htmlString)
   const replacedNode = document.querySelector(replacedNodeSelector)
 
-  replacedNode.parentNode.replaceChild(fragment, replacedNode)
+  if (replacedNode) {
+    replacedNode.parentNode.replaceChild(fragment, replacedNode)
+  }
 }
 
 /**
