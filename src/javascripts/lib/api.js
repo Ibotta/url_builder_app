@@ -1,7 +1,8 @@
 /**
- * Zendesk API Function to retrieve full ticket data via ticketId.
+ * Zendesk API function to retrieve full Ticket object via ticketId.
  * 
- * @param {number} ticketId 
+ * @param {number} ticketId The ticketId the agent is currently viewing.
+ * @return {Object} an Object used in the ZAFClient.request method to make the REST call. 
  */
 export function getTicketData(ticketId) {
     return {
@@ -11,6 +12,11 @@ export function getTicketData(ticketId) {
     }
 }
  
+/**
+ * Zendesk API function to retrieve full User object via userId.
+ * @param {number} userId Assignee, Requester, or Current User's userId.
+ * @return {Object} an Object used in the ZAFClient.request method to make the REST call. 
+ */
 export function getUserData(userId) {
     return {
         url: `/api/v2/users/${userId}.json`,
@@ -19,6 +25,11 @@ export function getUserData(userId) {
     }
 }
  
+/**
+ * Zendesk API function to retrieve full Organization object via orgId.
+ * @param {number} orgId Organization ID of the User or Ticket object.
+ * @return {Object} an Object used in the ZAFClient.request method to make the REST call. 
+ */
 export function getOrganizationData(orgId) {
     return {
         url: `/api/v2/organizations/${orgId}.json`,

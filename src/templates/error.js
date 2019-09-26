@@ -1,3 +1,6 @@
+/**
+ * Template that renders a generic error message and link to our GitHub Issues page.
+ */
 export default function() {
   return (`
     <div class="error">

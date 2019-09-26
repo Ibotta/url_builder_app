@@ -1,5 +1,9 @@
 import { templatingLoop as loop, escapeSpecialChars as escape } from '../javascripts/lib/helpers.js'
 
+/**
+ * Create a list item that is a button with a hyperlink.
+ * @param {Object} uri - Object with a title for the button text and URL for the hyperlink
+ */
 function uriMarkup (uri) {
   return (`
     <li>
@@ -10,6 +14,10 @@ function uriMarkup (uri) {
   `);
 }
 
+/**
+ * Creates an unordered list, displayed as buttons, with hyperlinks.
+ * @param {Array} templateUris - Array of text and URLs used to create buttons with hyperlinks.
+ */
 export default function (templateUris) {
   return (`
     <div id="well-urls" class="well well-small">
