@@ -43,48 +43,38 @@ describe('Example App', () => {
 
   describe('Initialization Failure', () => {
     beforeEach((done) => {
-      document.body.outerHTML = '<body id="app"><section data-main><img class="loader" src="spinner.gif"/></section></body>'
-      client.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('a fake error')))
-      // helpers.resizeAppContainer = jest.fn().mockReturnValue(Promise.reject(new Error))
-      app = new App(APP_DATA);
-      errorSpy = jest.spyOn(helpers, 'asyncErrorHandler')
+      document.body.id = 'app';
+      document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
 
-      app.initializePromise.then(() => {
-        done()
-      })
+      client.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('a fake error')));
+      app = new App(APP_DATA);
+      errorSpy = jest.spyOn(helpers, 'asyncErrorHandler');
+
+      app.initializePromise.catch(() => done());
     })
 
-    it('should display an error message in the console', () => {
+    it('should display an error when no templates are input', () => {
       expect(errorSpy).toBeCalled()
     })
   })
 
-  /*
   describe('Initialization Success', () => {
     beforeEach((done) => {
-      document.body.innerHTML = '<section data-main><img class="loader" src="spinner.gif"/></section>'
-      client.request = jest.fn().mockReturnValueOnce(Promise.resolve(ORGANIZATIONS))
+      document.body.id = 'app';
+      document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
+
+      client.request = jest.fn().mockReturnValueOnce(Promise.resolve({}))
       client.invoke = jest.fn().mockReturnValue(Promise.resolve({}))
 
-      app = new App(client, {})
+      app = new App(APP_DATA)
 
       app.initializePromise.then(() => {
         done()
-      })
+      });
     })
 
     it('should render main stage with data', () => {
-      expect(document.querySelector('.example-app')).not.toBe(null)
-      expect(document.querySelector('h1').textContent).toBe('Hi Sample User, this is a sample app')
-      expect(document.querySelector('h2').textContent).toBe('default.organizations:')
-    })
-
-    it('should retrieve the organizations data', () => {
-      expect(app.states.organizations).toEqual([
-        { name: 'Organization A' },
-        { name: 'Organization B' }
-      ])
+      expect(document.querySelector('.app')).not.toBe(null)
     })
   })
-   */
 })
