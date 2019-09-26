@@ -1,3 +1,8 @@
+/**
+ * Zendesk API Function to retrieve full ticket data via ticketId.
+ * 
+ * @param {number} ticketId 
+ */
 export function getTicketData(ticketId) {
     return {
         url: `/api/v2/tickets/${ticketId}.json`,
