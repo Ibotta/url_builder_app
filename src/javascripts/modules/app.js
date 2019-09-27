@@ -2,7 +2,7 @@
  *  Example app
  **/
 
-import I18n from '../../javascripts/lib/i18n'
+import 'babel-polyfill';
 import { resizeAppContainer, render, asyncErrorHandler, errorHandler } from '../../javascripts/lib/helpers'
 import getDefaultTemplate from '../../templates/default'
 import getContext, { buildTemplatesFromContext, getUrisFromSettings } from './context'
