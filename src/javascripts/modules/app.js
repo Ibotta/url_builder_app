@@ -20,6 +20,12 @@ class App {
 
   /**
    * Initialize module, render main template
+   * 
+   * Steps:
+   * 1. Retreive URIs from app settings.
+   * 2. Build a context object with ticket and user data.
+   * 3. Templates are built using the URI and Context to replace URL Placeholders with data from context.
+   * 4. Render these templates as buttons.
    */
   async init () {
     const uris = await asyncErrorHandler(getUrisFromSettings, this.settings);
@@ -29,6 +35,11 @@ class App {
     return this.renderTemplates(templates);
   }
 
+  /**
+   * An Array of Objects, with a "title" and "uri".  
+   * The title is rendered as the button text, and the URI is the HTML link.
+   * @param {Array} templates 
+   */
   renderTemplates(templates) {
     render('.loader', getDefaultTemplate(templates))
 
