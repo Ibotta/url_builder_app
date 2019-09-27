@@ -13,7 +13,7 @@ function mockGetTemplate (item) {
 }
 
 jest.mock('../src/javascripts/lib/client', () => ({
-  get: (endpoint) => {
+  get: async (endpoint) => {
     switch (endpoint) {
       case 'currentUser':
         return {
@@ -29,19 +29,25 @@ jest.mock('../src/javascripts/lib/client', () => ({
         return {};
     }
   },
-  invoke: () => {},
+  invoke: () => (Promise.resolve({})),
   request: () => {},
 }));
 
-describe('resizeContainer', () => {
+describe('resizeAppContainer', () => {
   let appSpy;
 
-  beforeEach(() => {
+  beforeEach((done) => {
+    document.body.id = 'app'
+    document.body.innerHTML = '<section><div></div></section>';
     appSpy = jest.spyOn(client, 'invoke');
   });
 
+  afterEach(() => {
+    document.body.id = '';
+  });
+
   it('client.invoke has been called', () => {
-    resizeAppContainer()
+    resizeAppContainer();
     expect(appSpy).toHaveBeenCalled()
   })
 })
