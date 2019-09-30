@@ -68,6 +68,10 @@ export function escapeSpecialChars (str) {
   return str.replace(/[&<>"'`=]/g, function (m) { return escape[m] })
 }
 
+/**
+ * Logs error message and renders our error template.
+ * @param {Error} error Exception caught by our error handling functions.
+ */
 export function renderErrorTemplate(error) {
   console.error(error);
 
@@ -75,6 +79,11 @@ export function renderErrorTemplate(error) {
   return resizeAppContainer();
 }
 
+/**
+ * Wraps synchronous function calls in an error handler.
+ * @param {*} func Synchronous client function call.
+ * @param  {...any} params Function parameters used in the call.
+ */
 export function errorHandler(func, ...params) {
   try {
     return func(...params);
@@ -83,6 +92,11 @@ export function errorHandler(func, ...params) {
   }
 }
 
+/**
+ * Wraps async function calls in an error handler.
+ * @param {*} asyncFunction Asynchronous client function call.
+ * @param  {...any} params Function parameters used in the call.
+ */
 export async function asyncErrorHandler(asyncFunction, ...params) {
   try {
     return await asyncFunction(...params);
