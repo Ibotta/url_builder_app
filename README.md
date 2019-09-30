@@ -4,12 +4,6 @@
 
 # URL Builder App
 
-## TODOs:
-1. Have Legal look over the LICENSE.
-2. Add useful documentation to the Wiki.
-3. Add a build tag from Travis?
-4. Code Coverage check?
-
 ## Description:
 
 A Zendesk App to help you generate links for agents.
