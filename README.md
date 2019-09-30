@@ -1,3 +1,5 @@
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+
 :warning: *Use of this software is subject to important terms and conditions as set forth in the License file* :warning:
 
 # URL Builder App
@@ -39,10 +41,8 @@ The following is an example of what can be entered into this app's settings:
     "url": "http://example.com/?custom={{ticket.custom_field_424242}}"
   }
 ]
+
 ```
-
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
-
 This example will generate the following HTML inside the app:
 ```html
 <ul>
