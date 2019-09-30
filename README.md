@@ -41,6 +41,8 @@ The following is an example of what can be entered into this app's settings:
 ]
 ```
 
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+
 This example will generate the following HTML inside the app:
 ```html
 <ul>
