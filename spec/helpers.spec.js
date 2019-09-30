@@ -29,27 +29,35 @@ jest.mock('../src/javascripts/lib/client', () => ({
         return {};
     }
   },
-  invoke: () => (Promise.resolve({})),
+  invoke: () => {},
   request: () => {},
 }));
 
 describe('resizeAppContainer', () => {
-  let appSpy;
+  let documentSpy;
+  let clientSpy;
 
-  beforeEach((done) => {
+  beforeEach(() => {
     document.body.id = 'app'
-    document.body.innerHTML = '<section><div></div></section>';
-    appSpy = jest.spyOn(client, 'invoke');
+    clientSpy = jest.spyOn(client, 'invoke');
   });
 
-  afterEach(() => {
-    document.body.id = '';
-  });
+  it('resizes container to the size of app body', () => {
+    document.id = 'app';
+    const prevHeight = document.getElementById('app').clientHeight;
 
-  it('client.invoke has been called', () => {
+    document.body.innerHTML = '<section><div><h1>TEST HEADER</h1></div></section>';
+
     resizeAppContainer();
-    expect(appSpy).toHaveBeenCalled()
-  })
+
+    expect(prevHeight).not.toEqual(nextHeight);
+    expect(clientSpy).toHaveBeenCalled();
+  });
+
+  it('resizes container from inputted dimensions', () => {
+    resizeAppContainer();
+    expect(clientSpy).toHaveBeenCalled();
+  });
 })
 
 describe('templatingLoop', () => {
@@ -67,9 +75,9 @@ describe('render', () => {
     document.body.innerHTML = '<div id="placeholder"></div>'
     expect(document.querySelectorAll('#placeholder').length).toBe(1)
 
-    render('#placeholder', '<div id="app"></div>')
+    render('#placeholder', '<div id="main"></div>')
     expect(document.querySelectorAll('#placeholder').length).toBe(0)
-    expect(document.querySelectorAll('#app').length).toBe(1)
+    expect(document.querySelectorAll('#main').length).toBe(1)
   })
 })
 

@@ -5,7 +5,7 @@ export function getTicketData(ticketId) {
         dataType: 'json'
     }
 }
- 
+
 export function getUserData(userId) {
     return {
         url: `/api/v2/users/${userId}.json`,

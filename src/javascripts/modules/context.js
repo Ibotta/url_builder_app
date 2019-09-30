@@ -31,7 +31,7 @@ export function buildTemplatesFromContext(uris, context) {
  * TODO: JS DOcs
  * @param {*} ticket 
  */
-function assignTicketFields(ticket, ticketFields) {
+export function assignTicketFields(ticket, ticketFields) {
   const ticketCopy = Object.assign({}, ticket);
 
   ticketFields.ticket.custom_fields.forEach(custom_field => {
@@ -45,9 +45,9 @@ function assignTicketFields(ticket, ticketFields) {
  * TODO: JS Docs
  * @param {*} user 
  */
-async function processUserObject(user) {
+export async function processUserObject(user) {
   const [firstName = '', lastName = ''] = (user.name || '').split(' ');
-  const { user: {user_fields}} = await client.request(getUserData(user.id));
+  const { user: { user_fields } } = await client.request(getUserData(user.id));
 
   return {
     ...user,
@@ -81,7 +81,7 @@ async function getContext() {
   const { currentUser } = await client.get('currentUser');
   let { ticket } = await client.get('ticket');
   const ticketFields = await client.request(getTicketData(ticket.id));
-
+  console.log(ticketFields);
   if (ticket.organization) {
     const { organization } = await client.request(getOrganizationData(ticket.organization.id));
     ticket.organization.organization_fields = organization.organization_fields;

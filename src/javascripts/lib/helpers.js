@@ -15,7 +15,7 @@ export function resizeAppContainer (dimensions) {
     return client.invoke('resize', { ...dimensions })
   }
 
-  const { clientHeight } = document.getElementById('app');
+  const { clientHeight = '300px' } = document.getElementById('app');
 
   return client.invoke('resize', { height: clientHeight });
 }

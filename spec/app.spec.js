@@ -51,8 +51,8 @@ describe('App Initialization', () => {
       errorSpy = jest.spyOn(helpers, 'asyncErrorHandler');
 
       app.initializePromise
-      .then(() => done())
-      .catch(() => done());
+        .then(() => done())
+        .catch(() => done());
     });
 
     it('should display an error when no templates are input', () => {
