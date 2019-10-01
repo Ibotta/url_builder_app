@@ -1,8 +1,6 @@
 /**
- *  Example app
+ *  URL Builder App
  **/
-
-import 'babel-polyfill';
 import { resizeAppContainer, render, asyncErrorHandler, errorHandler } from '../../javascripts/lib/helpers'
 import getDefaultTemplate from '../../templates/default'
 import getContext, { buildTemplatesFromContext, getUrisFromSettings } from './context'
@@ -18,7 +16,7 @@ class App {
 
   /**
    * Initialize module, render main template
-   * 
+   *
    * Steps:
    * 1. Retreive URIs from app settings.
    * 2. Build a context object with ticket and user data.
@@ -34,9 +32,9 @@ class App {
   }
 
   /**
-   * An Array of Objects, with a "title" and "uri".  
+   * An Array of Objects, with a "title" and "uri".
    * The title is rendered as the button text, and the URI is the HTML link.
-   * @param {Array} templates 
+   * @param {Array} templates
    */
   renderTemplates(templates) {
     render('.loader', getDefaultTemplate(templates))
