@@ -15,7 +15,7 @@ export function resizeAppContainer (dimensions) {
     return client.invoke('resize', { ...dimensions })
   }
 
-  const { clientHeight } = document.getElementById('app');
+  const { clientHeight = '300px' } = document.getElementById('app');
 
   return client.invoke('resize', { height: clientHeight });
 }
@@ -42,7 +42,9 @@ export function render (replacedNodeSelector, htmlString) {
   const fragment = document.createRange().createContextualFragment(htmlString)
   const replacedNode = document.querySelector(replacedNodeSelector)
 
-  replacedNode.parentNode.replaceChild(fragment, replacedNode)
+  if (replacedNode) {
+    replacedNode.parentNode.replaceChild(fragment, replacedNode)
+  }
 }
 
 /**

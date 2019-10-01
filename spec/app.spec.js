@@ -1,7 +1,9 @@
 /* eslint-env jest, browser */
 import App from '../src/javascripts/modules/app'
-import { CLIENT, ORGANIZATIONS } from './mocks/mock'
+import { APP_DATA } from './mocks/mock'
 import createRangePolyfill from './polyfills/createRange'
+import client from '../src/javascripts/lib/client';
+import * as helpers from '../src/javascripts/lib/helpers';
 
 jest.mock('../src/javascripts/lib/i18n', () => {
   return {
@@ -14,52 +16,54 @@ if (!document.createRange) {
   createRangePolyfill()
 }
 
-describe('Example App', () => {
+describe('App Initialization', () => {
   let errorSpy
   let app
 
   describe('Initialization Failure', () => {
+    beforeEach(() => {
+      // reset mocks
+      client.get = jest.fn().mockReturnValue(Promise.resolve({}));
+      client.invoke = jest.fn().mockReturnValue(Promise.resolve({}));
+      client.request = jest.fn().mockReturnValue(Promise.resolve({}));
+    });
+
     beforeEach((done) => {
-      document.body.innerHTML = '<section data-main><img class="loader" src="spinner.gif"/></section>'
-      CLIENT.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('a fake error')))
+      document.body.id = 'app';
+      document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
 
-      app = new App(CLIENT, {})
-      errorSpy = jest.spyOn(app, '_handleError')
+      client.request = jest.fn().mockReturnValue(Promise.reject(new Error('a fake error')));
+      app = new App(APP_DATA);
+      errorSpy = jest.spyOn(helpers, 'asyncErrorHandler');
 
-      app.initializePromise.then(() => {
-        done()
-      })
-    })
+      app.initializePromise
+        .then(() => done())
+        .catch(() => done());
+    });
 
-    it('should display an error message in the console', () => {
-      expect(errorSpy).toBeCalled()
+    it('should display an error when no templates are input', () => {
+      expect(errorSpy).toBeCalled();
+      expect(document.querySelector('.error')).not.toBe(null)
     })
   })
 
   describe('Initialization Success', () => {
     beforeEach((done) => {
-      document.body.innerHTML = '<section data-main><img class="loader" src="spinner.gif"/></section>'
-      CLIENT.request = jest.fn().mockReturnValueOnce(Promise.resolve(ORGANIZATIONS))
-      CLIENT.invoke = jest.fn().mockReturnValue(Promise.resolve({}))
+      document.body.id = 'app';
+      document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
 
-      app = new App(CLIENT, {})
+      client.request = jest.fn().mockReturnValueOnce(Promise.resolve({}))
+      client.invoke = jest.fn().mockReturnValue(Promise.resolve({}))
+
+      app = new App(APP_DATA)
 
       app.initializePromise.then(() => {
         done()
-      })
+      });
     })
 
     it('should render main stage with data', () => {
-      expect(document.querySelector('.example-app')).not.toBe(null)
-      expect(document.querySelector('h1').textContent).toBe('Hi Sample User, this is a sample app')
-      expect(document.querySelector('h2').textContent).toBe('default.organizations:')
-    })
-
-    it('should retrieve the organizations data', () => {
-      expect(app.states.organizations).toEqual([
-        { name: 'Organization A' },
-        { name: 'Organization B' }
-      ])
+      expect(document.querySelector('#app')).not.toBe(null)
     })
   })
 })

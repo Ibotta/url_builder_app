@@ -52,9 +52,6 @@ module.exports = {
         test: /\.js$/,
         use: {
           loader: 'babel-loader',
-          query: {
-            presets: ['es2015']
-          },
         }
       },
       {
