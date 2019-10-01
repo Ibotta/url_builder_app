@@ -22,4 +22,5 @@ after_success:
 
 addons:
   code_climate:
-    repo_token: $CODECLIMATE_REPO_TOKEN
+    repo_token:
+      secure: $CODECLIMATE_REPO_TOKEN
