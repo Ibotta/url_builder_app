@@ -1,34 +1,13 @@
 import currentUserFactory from "./factories/currentUser";
 import ticketFactory from "./factories/ticket";
-import { assignTicketFields, processUserObject } from "../src/javascripts/modules/context";
+import getContext, { assignTicketFields, processUserObject } from "../src/javascripts/modules/context";
 import client from "../src/javascripts/lib/client";
-
-jest.mock('../src/javascripts/lib/client', () => ({
-  get: (endpoint) => {
-    switch (endpoint) {
-      case 'currentUser':
-        return {
-          currentUser: currentUserFactory(),
-        }
-      case 'ticket':
-        return {
-          ticket: {
-            id: 1234,
-          }
-        }
-      default:
-        return {};
-    }
-  },
-  invoke: () => {},
-  request: () => {},
-}));
 
 describe('#context', () => {
   describe('#assignTicketFields', () => {
     it ('should add custom field keys to original ticket', () => {
       let ticket = ticketFactory();
-      const ticketFields = { ticket: ticketFactory(true) };
+      const ticketFields = ticketFactory(true);
       const customFields = ticketFields.ticket.custom_fields.map(cf => `custom_field_${cf.id}`);
       ticket = assignTicketFields(ticket, ticketFields);
       expect(Object.keys(ticket)).toEqual(expect.arrayContaining(customFields))
@@ -80,13 +59,24 @@ describe('#context', () => {
   });
 
   describe('#getContext', () => {
-    it('should retrieve the ticket context', () => {
-     // compare mocks to stuff
-    });
+    it('should retrieve the ticket context with user information ', async () => {
+      client.get = jest.fn().mockImplementation(async () => ({ ...ticketFactory(), ...currentUserFactory() }));
 
-    it('should throw error on any failure', () => {
-      // fail at all async calls and test that it stops
-      
+      client.request = jest.fn().mockImplementation(async ({ url }) => {
+          if(url.includes('users')) {
+            return currentUserFactory(true);
+          } else if (url.includes('tickets')) {
+            return ticketFactory(true);
+          }
+        });
+
+      const context = await getContext();
+      const requesterKeys = Object.keys(context.ticket.requester).sort();
+      const assigneeKeys = Object.keys(context.ticket.assignee.user).sort();
+
+      const expected = ['externalId', 'id', 'name', 'firstName', 'lastName', 'user_fields'].sort();
+      expect(requesterKeys).toEqual(expected);
+      expect(assigneeKeys).toEqual(expected);
     });
   });
 });

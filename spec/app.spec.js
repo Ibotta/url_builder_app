@@ -12,27 +12,6 @@ jest.mock('../src/javascripts/lib/i18n', () => {
   }
 })
 
-jest.mock('../src/javascripts/lib/client', () => ({
-  get: (endpoint) => {
-    switch (endpoint) {
-      case 'currentUser':
-        return {
-          currentUser: {},
-        }
-      case 'ticket':
-        return {
-          ticket: {
-            id: 1234,
-          }
-        }
-      default:
-        return {};
-    }
-  },
-  invoke: () => {},
-  request: () => {},
-}));
-
 if (!document.createRange) {
   createRangePolyfill()
 }
@@ -42,6 +21,13 @@ describe('App Initialization', () => {
   let app
 
   describe('Initialization Failure', () => {
+    beforeEach(() => {
+      // reset mocks
+      client.get = jest.fn().mockReturnValue(Promise.resolve({}));
+      client.invoke = jest.fn().mockReturnValue(Promise.resolve({}));
+      client.request = jest.fn().mockReturnValue(Promise.resolve({}));
+    });
+
     beforeEach((done) => {
       document.body.id = 'app';
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'

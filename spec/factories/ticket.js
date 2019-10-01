@@ -16,8 +16,10 @@ const ticketFactory = (useEndpoint = false, ticketDefaults = {}, requesterDefaul
   // When using the endpoint, the only field we care about is custom_fields
   if (useEndpoint) {
     return {
-      custom_fields: customFieldFactory(),
-      ...ticketDefaults,
+      ticket: {
+        custom_fields: customFieldFactory(),
+        ...ticketDefaults,
+      }
     }
   }
 
@@ -42,12 +44,13 @@ const ticketFactory = (useEndpoint = false, ticketDefaults = {}, requesterDefaul
   }
 
   return {
-    id: faker.random.number(),
-    assignee: assignee,
-    requester: requester,
-    externalId: `${faker.random.number()}`,
-    id: faker.random.number(),
-    ...ticketDefaults,
+    ticket: {
+      id: faker.random.number(),
+      assignee: assignee,
+      requester: requester,
+      externalId: `${faker.random.number()}`,
+      ...ticketDefaults,
+    }
   }
 }
 

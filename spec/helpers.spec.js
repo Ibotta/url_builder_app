@@ -44,11 +44,9 @@ describe('resizeAppContainer', () => {
 
   it('resizes container to the size of app body', () => {
     document.id = 'app';
-    const prevHeight = document.getElementById('app').clientHeight;
-
     document.body.innerHTML = '<section><div><h1>TEST HEADER</h1></div></section>';
-
-    resizeAppContainer();
+    const prevHeight = document.getElementById('app');
+    const nextHeight = resizeAppContainer();
 
     expect(prevHeight).not.toEqual(nextHeight);
     expect(clientSpy).toHaveBeenCalled();
