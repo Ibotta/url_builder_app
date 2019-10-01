@@ -88,6 +88,7 @@ async function getContext() {
 
   const { currentUser } = await client.get('currentUser');
   let { ticket } = await client.get('ticket');
+
   const ticketFields = await client.request(getTicketData(ticket.id));
 
   /**

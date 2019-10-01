@@ -12,27 +12,6 @@ function mockGetTemplate (item) {
   return `${item}-`
 }
 
-jest.mock('../src/javascripts/lib/client', () => ({
-  get: async (endpoint) => {
-    switch (endpoint) {
-      case 'currentUser':
-        return {
-          currentUser: {},
-        }
-      case 'ticket':
-        return {
-          ticket: {
-            id: 1234,
-          }
-        }
-      default:
-        return {};
-    }
-  },
-  invoke: () => {},
-  request: () => {},
-}));
-
 describe('resizeAppContainer', () => {
   let documentSpy;
   let clientSpy;

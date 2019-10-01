@@ -32,7 +32,7 @@ describe('App Initialization', () => {
       document.body.id = 'app';
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
 
-      client.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('a fake error')));
+      client.request = jest.fn().mockReturnValue(Promise.reject(new Error('a fake error')));
       app = new App(APP_DATA);
       errorSpy = jest.spyOn(helpers, 'asyncErrorHandler');
 
