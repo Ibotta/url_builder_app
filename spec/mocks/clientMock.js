@@ -1,4 +1,4 @@
-import  mockCurrentUser from '../factories/currentUser';
+import mockCurrentUser from '../factories/currentUser';
 import mockTicket from '../factories/ticket';
 
 /**
