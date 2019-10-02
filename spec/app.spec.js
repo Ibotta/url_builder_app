@@ -4,6 +4,8 @@ import { APP_DATA } from './mocks/mock'
 import createRangePolyfill from './polyfills/createRange'
 import client from '../src/javascripts/lib/client';
 import * as helpers from '../src/javascripts/lib/helpers';
+import mockTicket from './factories/ticket';
+import mockCurrentUser from './factories/currentUser';
 
 jest.mock('../src/javascripts/lib/i18n', () => {
   return {
@@ -21,18 +23,11 @@ describe('App Initialization', () => {
   let app
 
   describe('Initialization Failure', () => {
-    beforeEach(() => {
-      // reset mocks
-      client.get = jest.fn().mockReturnValue(Promise.resolve({}));
-      client.invoke = jest.fn().mockReturnValue(Promise.resolve({}));
-      client.request = jest.fn().mockReturnValue(Promise.resolve({}));
-    });
-
     beforeEach((done) => {
       document.body.id = 'app';
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
 
-      client.request = jest.fn().mockReturnValue(Promise.reject(new Error('a fake error')));
+      client.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('a fake error')));
       app = new App(APP_DATA);
       errorSpy = jest.spyOn(helpers, 'asyncErrorHandler');
 
@@ -51,11 +46,14 @@ describe('App Initialization', () => {
     beforeEach((done) => {
       document.body.id = 'app';
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
-
-      client.request = jest.fn().mockReturnValueOnce(Promise.resolve({}))
-      client.invoke = jest.fn().mockReturnValue(Promise.resolve({}))
-
       app = new App(APP_DATA)
+      client.request = jest.fn().mockImplementation(async ({ url }) => {
+        if (url.includes('user')) {
+          return mockCurrentUser(true);
+        } else if(url.includes('tickets')) {
+          return mockTicket(true);
+        }
+      });
 
       app.initializePromise.then(() => {
         done()

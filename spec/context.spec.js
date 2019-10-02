@@ -51,7 +51,7 @@ describe('#context', () => {
     })
 
     it('should throw error when user fetch fails', () => {
-      client.request = jest.fn().mockReturnValue(Promise.reject(new Error('bad error')))
+      client.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('bad error')))
       const user = currentUserFactory();
 
       expect(processUserObject(user)).rejects.toMatch(new Error('bad error'));
