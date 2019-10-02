@@ -2,6 +2,7 @@ tmp/
 .DS_Store
 .zat
 .vscode
+.coverage
 node_modules
 dist
 coverage

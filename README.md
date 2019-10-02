@@ -1,12 +1,9 @@
+[![Build Status](https://travis-ci.com/Ibotta/url_builder_app.svg?branch=master)](https://travis-ci.com/Ibotta/url_builder_app)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+
 :warning: *Use of this software is subject to important terms and conditions as set forth in the License file* :warning:
 
 # URL Builder App
-
-## TODOs:
-1. Have Legal look over the LICENSE.
-2. Add useful documentation to the Wiki.
-3. Add a build tag from Travis?
-4. Code Coverage check?
 
 ## Description:
 
@@ -39,8 +36,8 @@ The following is an example of what can be entered into this app's settings:
     "url": "http://example.com/?custom={{ticket.custom_field_424242}}"
   }
 ]
-```
 
+```
 This example will generate the following HTML inside the app:
 ```html
 <ul>
