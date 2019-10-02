@@ -7,7 +7,7 @@ import mockTicket from '../factories/ticket';
  */
 const mockClient = () => {
   jest.mock('../../src/javascripts/lib/client', () => ({
-    get: (endpoint) => {
+    get: async (endpoint) => {
       switch (endpoint) {
         case 'currentUser':
           return mockCurrentUser();
@@ -18,7 +18,7 @@ const mockClient = () => {
       }
     },
     invoke: (height) => (height),
-    request: ({ url }) => {
+    request: async ({ url }) => {
       if(url.includes('users')) {
         return mockCurrentUser(true);
       } else if (url.includes('tickets')) {
