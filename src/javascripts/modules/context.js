@@ -49,7 +49,7 @@ export function assignTicketFields(ticket, ticketFields) {
  */
 export async function processUserObject(user) {
   const [firstName = '', lastName = ''] = (user.name || '').split(' ');
-  const { user: {user_fields}} = await client.request(getUserData(user.id));
+  const { user: { user_fields } } = await client.request(getUserData(user.id));
 
   return {
     ...user,
@@ -88,6 +88,7 @@ async function getContext() {
 
   const { currentUser } = await client.get('currentUser');
   let { ticket } = await client.get('ticket');
+
   const ticketFields = await client.request(getTicketData(ticket.id));
 
   /**
