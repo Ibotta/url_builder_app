@@ -87,7 +87,7 @@ If you wish to change the output, locate the app by looking for the name you cho
 <img width="195" src="https://github.com/watchmanmonitoring/url_builder_app/raw/master/assets/app-settings-change.png" />
 
 ## Issues
-To submit an issue, please follow the [available template](/.github/ISSUE_TEMPLATE).
+To submit an issue, please follow the [available template](/.github/ISSUE_TEMPLATE.md).
 
 ## Contribution
 
