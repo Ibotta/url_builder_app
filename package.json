@@ -18,7 +18,9 @@
     "build:dev": "webpack --mode=development",
     "build": "webpack -p --mode=production",
     "lint": "standard",
-    "start": "zat server -p ./dist"
+    "start": "zat server -p ./dist",
+    "package": "zat package -p ./dist",
+    "validate": "zat validate -p ./dist"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
