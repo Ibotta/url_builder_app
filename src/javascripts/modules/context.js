@@ -73,11 +73,11 @@ async function getContext() {
     let context = {};
     context.ticket = ticket;
 
-    if (ticket.requester.id) {
+    if (ticket.requester) {
       context.ticket.requester = await processUserObject(ticket.requester);
     }
 
-    if (ticket.assignee.user.id) {
+    if (ticket.assignee.user) {
       context.ticket.assignee.user = await processUserObject(ticket.assignee.user);
     }
 
