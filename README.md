@@ -1,11 +1,10 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Build Status](https://travis-ci.com/Ibotta/url_builder_app.svg?branch=master)](https://travis-ci.com/Ibotta/url_builder_app)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ae9af0fae166c51f8f8a/maintainability)](https://codeclimate.com/repos/5d9242ca2d833400b1000180/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ae9af0fae166c51f8f8a/test_coverage)](https://codeclimate.com/repos/5d9242ca2d833400b1000180/test_coverage)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](.github/CODE_OF_CONDUCT.md)
 
-:warning: *Use of this software is subject to important terms and conditions as set forth in the License file* :warning:
-
-# URL Builder App
+# URL Builder App V2
 
 ## Description:
 
