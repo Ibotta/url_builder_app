@@ -13,17 +13,23 @@ A Zendesk App to help you generate links for agents.
 ## Changes from V1 to V2
 We've included some helpful information about what has changed in the V2 of this app in our [Wiki](https://github.com/Ibotta/url_builder_app/wiki/Changes-from-V1-to-V2)
 
-## Instructions:
+## Usage Instructions:
 
-1. Download a [.zip of this app](https://github.com/ibotta/url_builder_app/archive/master.zip)
-2. Navigate to your Zendesk Admin's Apps -> Manage page
-3. Click `Upload App`
-4. Enter a descriptive name of your choosing, and upload this .zip
-5. Click `Upload`
-6. Confirm the title, the second box is for the `json`, described below.
+1. Navigate to the Zendesk Marketplace and find "URL Builder App V2".
+2. Click "Install".
+3. Similarly, you can reach this screen by going to your installed apps, and clicking "Change Settings".
+![change-settings](assets/change-settings.png)
+4. Select your account to install the app.
+5. Confirm the title; this will display in the URL Builder App box above the links:
+![installation-title](assets/installation-title.png)
+6. The second box is for the URLS, and uses an array of JSON, described below. In this example, note we are using a placeholder `{{ticket.requester.id}}`.
+![json-array-of-urls](json-array-of-urls.png)
 7. Optionally enable role restrictions if these URLs are not appropriate for all agents.
-8. Once your .json is in place, click `Install`.
+8. Once your JSON is in place, click `Install`.
 9. Open a new browser to test your results.
+![links](assets/links.png)
+If we highlight the `User Info` link, we see the placeholder `ticket.requester.id` has been replaced with ticket requester's ID of `377511204654`.
+![example-url](example-url.png)
 
 ## JSON Array of URLs:
 
@@ -82,18 +88,9 @@ This example will generate the following HTML inside the app:
 * {{currentUser.firstName}}
 * {{currentUser.lastName}}
 
-### Making changes
-
-If you wish to change the output, locate the app by looking for the name you choose in step 4 above. Use the widget to `Change Settings`
-
-<img width="195" src="https://github.com/watchmanmonitoring/url_builder_app/raw/master/assets/app-settings-change.png" />
-
 ## Issues
 To submit an issue, please follow the [available template](/.github/ISSUE_TEMPLATE.md).
 
 ## Contribution
 
 Improvements are always welcome. To contribute, please submit detailed Pull Requests following the [guidelines](/.github/CONTRIBUTING.md).
-
-## Screenshot(s):
-![screenshot-1](/assets/screenshot.png)
