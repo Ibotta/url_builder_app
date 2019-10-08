@@ -1,5 +1,8 @@
 ## How to contribute to the URL Builder App V2
 
+### Pull Requests
+When making a pull request, be sure the merging repo is `ibotta/url_builder_app` and not `zendesklabs/url_builder_app`!
+
 #### **Did you find a bug?**
 
 * **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/ibotta/url_builder_app/issues).
@@ -24,7 +27,7 @@
 
 ### Testing changes in Sandbox/Production using ZAT Server
 
-Zendesk Apps Tools is a command-line tool offered by Zendesk to create, test, validate and build Zendesk Apps.  It is also used to test local changes on your Zendesk page in sandbox or production.  You can find out more (in the Apps Developer Guide)[https://developer.zendesk.com/apps/docs/developer-guide/zat].
+Zendesk Apps Tools is a command-line tool offered by Zendesk to create, test, validate and build Zendesk Apps.  It is also used to test local changes on your Zendesk page in sandbox or production.  You can find out more [in the Apps Developer Guide](https://developer.zendesk.com/apps/docs/developer-guide/zat)
 
 Thanks! :heart: :heart: :heart:
 
