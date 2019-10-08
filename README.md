@@ -23,13 +23,14 @@ We've included some helpful information about what has changed in the V2 of this
 5. Confirm the title; this will display in the URL Builder App box above the links:
 ![installation-title](assets/installation-title.png)
 6. The second box is for the URLS, and uses an array of JSON, described below. In this example, note we are using a placeholder `{{ticket.requester.id}}`.
-![json-array-of-urls](json-array-of-urls.png)
+![json-array-of-urls](assets/json-array-of-urls.png)
 7. Optionally enable role restrictions if these URLs are not appropriate for all agents.
 8. Once your JSON is in place, click `Install`.
 9. Open a new browser to test your results.
 ![links](assets/links.png)
+
 If we highlight the `User Info` link, we see the placeholder `ticket.requester.id` has been replaced with ticket requester's ID of `377511204654`.
-![example-url](example-url.png)
+![example-url](assets/example-url.png)
 
 ## JSON Array of URLs:
 
