@@ -1,4 +1,4 @@
-## How to contribute to the URL Builder
+## How to contribute to the URL Builder App V2
 
 #### **Did you find a bug?**
 
@@ -17,6 +17,14 @@
 * Suggest your change as a new issue and start writing code.
 
 * Do not open an issue on GitHub until you have collected positive feedback about the change. GitHub issues are primarily intended for bug reports and fixes.
+
+## Build Instructions
+
+`npm run package` - This will build the `dist` folder locally after `validate` has passed.  `dist/tmp` will contain the ZIP you need to upload your version of the app.
+
+### Testing changes in Sandbox/Production using ZAT Server
+
+Zendesk Apps Tools is a command-line tool offered by Zendesk to create, test, validate and build Zendesk Apps.  It is also used to test local changes on your Zendesk page in sandbox or production.  You can find out more (in the Apps Developer Guide)[https://developer.zendesk.com/apps/docs/developer-guide/zat].
 
 Thanks! :heart: :heart: :heart:
 
