@@ -92,15 +92,23 @@ async function getContext() {
   const ticketFields = await client.request(getTicketData(ticket.id));
 
   /**
-   * Tickets sometimes have a null organization.  If it is not null, get any custom fields for the org
-   * and assign them to the ticket organization object.
+   * Ticket organization is based on the nature of how the ticket was created.  
+   * If an organization is available and we can access it, we'll assign the fields.
+   * 
+   * From Zendesk (https://support.zendesk.com/hc/en-us/articles/203690926-Updating-ticket-requesters-and-organizations):
+   * - When a user who belongs to multiple organizations submits a ticket by email, it is assigned to their 
+   * - default organization. When the user creates a ticket in your Help Center, or when an agent creates a 
+   * - ticket on behalf of the user, the user or agent can select the organization for the ticket.
    */
   if (ticket.organization) {
-    const { organization } = await client.request(getOrganizationData(ticket.organization.id));
+    try {
+      const { organization } = await client.request(getOrganizationData(ticket.organization.id))
 
-    // If the call was successful, add the fields
-    if (organization) {
-      ticket.organization.organization_fields = organization.organization_fields;
+      if (organization) {
+        ticket.organization.organization_fields = organization.organization_fields;
+      }
+    } catch (error) {
+      console.error(`Error retrieving Organization fields for ${ticket.organization.id}: ${error}`)
     }
   }
 
