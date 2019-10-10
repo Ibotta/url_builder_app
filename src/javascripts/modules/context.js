@@ -97,7 +97,11 @@ async function getContext() {
    */
   if (ticket.organization) {
     const { organization } = await client.request(getOrganizationData(ticket.organization.id));
-    ticket.organization.organization_fields = organization.organization_fields;
+
+    // If the call was successful, add the fields
+    if (organization) {
+      ticket.organization.organization_fields = organization.organization_fields;
+    }
   }
 
   ticket = assignTicketFields(ticket, ticketFields);
