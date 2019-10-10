@@ -19,7 +19,7 @@
     "build": "webpack -p --mode=production",
     "lint": "standard",
     "start": "zat server -p ./dist",
-    "package": "zat package -p ./dist",
+    "package": "webpack -p --mode=production && zat package -p ./dist",
     "validate": "zat validate -p ./dist"
   },
   "devDependencies": {
