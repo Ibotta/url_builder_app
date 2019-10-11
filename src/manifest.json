@@ -5,6 +5,7 @@
     "email": "osscompliance@ibotta.com",
     "url": "https://www.ibotta.com/"
   },
+  "private": false,
   "defaultLocale": "en",
   "location": {
     "support": {
