@@ -1,8 +1,10 @@
-tmp/
 .DS_Store
 .zat
 .vscode
 .coverage
 node_modules
-dist
+dist/assets
+dist/translations
+dist/.zat
+dist/manifest.json
 coverage
