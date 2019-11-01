@@ -2,8 +2,8 @@
   "app": {
     "name": "URL Builder App V2",
     "short_description": "Generate Buttons from a list of URLs",
-    "long_description": "Generate Buttons from a list of URLs",
-    "installation_instructions": "Simply click the install button",
+    "long_description": "As the largest consumer technology company headquartered in Denver, CO, Ibotta (\"I bought a...\") is transforming the shopping experience by making it easy for consumers to earn cash back on everyday purchases through a single smartphone app. The company partners with leading brands and retailers to offer offers on groceries, electronics, clothing, gifts, home and office supplies, restaurant dining, and more.\nIbotta used the V1 version of the Zendesk Lab's URL Builder App for our Zendesk Agents, and took on the V2 migration.  This application offers:\nIncreased productivity with links to commonly used resources.\nCreate custom links using placeholders for Tickets, Requesters, Assignees, and more.",
+    "installation_instructions": "Clicking the `Install` button will add the application to your Zendesk's Apps.  The app is visible in the ticket and new ticket sidebars.  When customizing the app, you will see a text field to add a JSON Array of URLs.  For an example, please refer to our GitHub README Link available just above the textbox.  There, you will find screenshots and more guidance on how to customize the application for your needs.",
     "parameters": {
       "uri_templates": {
         "label": "A JSON Array of URLs.",
