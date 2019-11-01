@@ -29,7 +29,7 @@ const externalAssets = {
     'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css'
   ],
   js: [
-    'https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js',
+    'https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js',
     'https://cdn.jsdelivr.net/g/lodash@4.3.0,handlebarsjs@4.0.5,jquery@2.2.0'
   ]
 }
