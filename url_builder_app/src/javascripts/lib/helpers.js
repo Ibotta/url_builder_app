@@ -1,14 +1,14 @@
 import getErrorTemplate from '../../templates/error';
+import client from '../lib/client'
 
 const MAX_HEIGHT = 1000
 
 /**
  * Resize App container
- * @param {ZAFClient} client ZAFClient object
  * @param {Number} max max height available to resize to
  * @return {Promise} will resolved after resize
  */
-export function resizeContainer (client, max = Number.POSITIVE_INFINITY) {
+export function resizeContainer (max = Number.POSITIVE_INFINITY) {
   const newHeight = Math.min(document.body.clientHeight, max)
   return client.invoke('resize', { height: newHeight })
 }
@@ -63,37 +63,34 @@ export function escapeSpecialChars (str) {
 
 /**
  * Logs error message and renders our error template.
- * @param {ZAFClient} client ZAFClient object
  * @param {Error} error Exception caught by our error handling functions.
  */
-export function renderErrorTemplate(client, error) {
+export function renderErrorTemplate(error) {
   console.error(error);
 
   render('.loader', getErrorTemplate(error));
-  return resizeContainer(client, MAX_HEIGHT);
+  return resizeContainer(MAX_HEIGHT);
 }
 
 /**
  * Wraps synchronous function calls in an error handler.
- * @param {ZAFClient} client ZAFClient object
  * @param {*} func Synchronous client function call.
  * @param  {...any} params Function parameters used in the call.
  */
-export function errorHandler(client, func, ...params) {
+export function errorHandler(func, ...params) {
   try {
     return func(...params);
   } catch (err) {
-    renderErrorTemplate(client, err);
+    renderErrorTemplate(err);
   }
 }
 
 /**
  * Wraps async function calls in an error handler.
- * @param {ZAFClient} client ZAFClient object
  * @param {*} asyncFunction Asynchronous client function call.
  * @param  {...any} params Function parameters used in the call.
  */
-export async function asyncErrorHandler(client, asyncFunction, ...params) {
+export async function asyncErrorHandler(asyncFunction, ...params) {
   try {
     return await asyncFunction(...params);
   } catch (err) {

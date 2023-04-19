@@ -1,9 +1,10 @@
 /* eslint-env jest, browser */
 import App from '../src/javascripts/modules/app'
-import i18n from '../src/javascripts/lib/i18n';
+import i18n from '../src/javascripts/lib/i18n'
 import { CLIENT, NO_APP_DATA, APP_DATA } from './mocks/mock'
-import * as helpers from '../src/javascripts/lib/helpers';
-import screen from '@testing-library/react';
+import mockCurrentUser from './factories/currentUser'
+import mockTicket from './factories/ticket'
+import client from '../src/javascripts/lib/client'
 
 const mockEN = {
   'app.name': 'Example App',
@@ -111,7 +112,14 @@ describe('App Initialization', () => {
     beforeEach((done) => {
       document.body.id = 'app';
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
-      app = new App(CLIENT, APP_DATA)
+      app = new App(APP_DATA)
+      client.request = jest.fn().mockImplementation(async ({ url }) => {
+        if (url.includes('user')) {
+          return mockCurrentUser(true);
+        } else if(url.includes('tickets')) {
+          return mockTicket(true);
+        }
+      });
 
       app.initializePromise
         .then(() => done())

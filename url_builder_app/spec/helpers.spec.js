@@ -1,22 +1,26 @@
 /* eslint-env jest */
 import { resizeContainer, templatingLoop, render, escapeSpecialChars as escape } from '../src/javascripts/lib/helpers'
 import createRangePolyfill from './polyfills/createRange'
+import client from '../src/javascripts/lib/client'
 
 if (!document.createRange) {
   createRangePolyfill()
 }
 
-const client = {
-  invoke: jest.fn()
-}
 const dataSet = [1, 2, 3]
 function mockGetTemplate (item) {
   return `${item}-`
 }
 
 describe('resizeContainer', () => {
+  let clientSpy;
+
+  beforeEach(() => {
+    clientSpy = jest.spyOn(client, 'invoke');
+  });
+
   it('client.invoke has been called', () => {
-    resizeContainer(client)
+    resizeContainer()
     expect(client.invoke).toHaveBeenCalled()
   })
 })

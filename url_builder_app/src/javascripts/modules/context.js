@@ -1,4 +1,5 @@
 import { getTicketData, getUserData, getOrganizationData } from "../lib/api";
+import client from "../lib/client";
 
 const TEMPLATE_OPTIONS = { interpolate: /\{\{(.+?)\}\}/g };
 
@@ -60,7 +61,7 @@ export async function processUserObject(client, user) {
  * Retreives user and ticket data before building them into a single `context` object
  * used to replace our placeholders in the URIs with real data.
  */
-export async function getContext(client) {
+export async function getContext() {
   /**
    * Builds a context object with the ZAFClient ticket, currentUser, assignee, and requester.
    * @param {Object} ticket - ZAFClient ticket object (current ticket agent is viewing)

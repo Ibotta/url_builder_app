@@ -27,7 +27,7 @@ client.on('app.registered', function (appData) {
   app = appData;
   fieldsToWatch = getFieldsToWatchFromSettings(appData.metadata.settings);
 
-  return new App(client, appData);
+  return new App(appData);
 });
 
 /**
@@ -37,6 +37,6 @@ client.on('app.registered', function (appData) {
  */
 client.on('*.changed', e => {
   if (_.includes(fieldsToWatch, e.propertyName)) {
-    return new App(client, app);
+    return new App(app);
   }
 });
