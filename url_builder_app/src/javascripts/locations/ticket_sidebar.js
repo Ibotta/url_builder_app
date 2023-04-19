@@ -14,19 +14,10 @@ let app = {};
  * @param {String} uri_templates - String JSON array of URLs with title and URI address.
  */
 function getFieldsToWatchFromSettings({ uri_templates }) {
-  try {
-    const fieldsArray = _.reduce(JSON.parse(uri_templates), function (memo, uri) {
-      const fields = _.map(uri.url.match(/\{\{(.+?)\}\}/g), function (f) { return f.slice(2, -2) })
-      return _.union(memo, fields)
-    }, [])
-
-    if (_.isEmpty(fieldsArray))
-      throw new Error ("No Valid URI templates found.");
-
-    return fieldsArray
-  } catch (err) {
-    renderErrorTemplate(client, err);
-  }
+  return _.reduce(JSON.parse(uri_templates), function (memo, uri) {
+    const fields = _.map(uri.url.match(/\{\{(.+?)\}\}/g), function (f) { return f.slice(2, -2) })
+    return _.union(memo, fields)
+  }, [])
 }
 
 /**

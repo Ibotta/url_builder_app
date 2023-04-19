@@ -1,13 +1,10 @@
-/**
- *  Example app
- **/
 import React from 'react'
 import { ThemeProvider, DEFAULT_THEME } from '@zendeskgarden/react-theming'
 import { Grid, Row, Col } from '@zendeskgarden/react-grid'
 import { UnorderedList } from '@zendeskgarden/react-typography'
 import I18n from '../../javascripts/lib/i18n'
-import { render, resizeContainer, escapeSpecialChars as escape, errorHandler } from '../../javascripts/lib/helpers'
-import { getUrisFromSettings } from './context'
+import { render, resizeContainer, escapeSpecialChars as escape, asyncErrorHandler, errorHandler } from '../../javascripts/lib/helpers'
+import { getUrisFromSettings, getContext, buildTemplatesFromContext } from './context'
 import getDefaultTemplate from '../../templates/default'
 
 const MAX_HEIGHT = 1000
@@ -34,8 +31,10 @@ class App {
     I18n.loadTranslations(currentUser.locale)
 
     const uris = errorHandler(this._client, getUrisFromSettings, this.settings);
+    const context = await asyncErrorHandler(this._client, getContext, this._client);
+    const templates = errorHandler(this._client, buildTemplatesFromContext, uris, context);
 
-    render('.loader', getDefaultTemplate(uris))
+    render('.loader', getDefaultTemplate(templates))
 
     return resizeContainer(this._client, MAX_HEIGHT)
 
