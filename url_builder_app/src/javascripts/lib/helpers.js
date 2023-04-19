@@ -1,5 +1,7 @@
 import getErrorTemplate from '../../templates/error';
 
+const MAX_HEIGHT = 1000
+
 /**
  * Resize App container
  * @param {ZAFClient} client ZAFClient object
@@ -68,7 +70,7 @@ export function renderErrorTemplate(client, error) {
   console.error(error);
 
   render('.loader', getErrorTemplate(error));
-  return resizeContainer(client);
+  return resizeContainer(client, MAX_HEIGHT);
 }
 
 /**

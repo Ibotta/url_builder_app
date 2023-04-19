@@ -12,6 +12,27 @@ export const CLIENT = {
     return Promise.resolve({
       [prop]: null
     })
+  },
+  invoke: (prop) => {
+    return Promise.resolve({
+      [prop]: null
+    })
+  }
+}
+
+export const APP_DATA = {
+  metadata: {
+    settings: {
+      uri_templates: '[{"title": "Google", "url": "https://google.com/"}, {"title": "Ibotta", "url": "https://ibotta.com/"}]'
+    }
+  }
+}
+
+export const NO_APP_DATA = {
+  metadata: {
+    settings: {
+      uri_templates: '[]'
+    }
   }
 }
 

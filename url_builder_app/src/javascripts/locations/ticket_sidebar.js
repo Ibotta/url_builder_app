@@ -15,10 +15,15 @@ let app = {};
  */
 function getFieldsToWatchFromSettings({ uri_templates }) {
   try {
-    return _.reduce(JSON.parse(uri_templates), function (memo, uri) {
+    const fieldsArray = _.reduce(JSON.parse(uri_templates), function (memo, uri) {
       const fields = _.map(uri.url.match(/\{\{(.+?)\}\}/g), function (f) { return f.slice(2, -2) })
       return _.union(memo, fields)
     }, [])
+
+    if (_.isEmpty(fieldsArray))
+      throw new Error ("No Valid URI templates found.");
+
+    return fieldsArray
   } catch (err) {
     renderErrorTemplate(client, err);
   }
@@ -33,10 +38,6 @@ client.on('app.registered', function (appData) {
 
   return new App(client, appData);
 });
-
-client.on('app.registered', function (appData) {
-  return new App(client, appData)
-})
 
 /**
  * Event listener that waits for any change events.  Reinitiates the app.

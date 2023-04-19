@@ -6,7 +6,7 @@ import { ThemeProvider, DEFAULT_THEME } from '@zendeskgarden/react-theming'
 import { Grid, Row, Col } from '@zendeskgarden/react-grid'
 import { UnorderedList } from '@zendeskgarden/react-typography'
 import I18n from '../../javascripts/lib/i18n'
-import { render, resizeContainer, escapeSpecialChars as escape, asyncErrorHandler } from '../../javascripts/lib/helpers'
+import { render, resizeContainer, escapeSpecialChars as escape, errorHandler } from '../../javascripts/lib/helpers'
 import { getUrisFromSettings } from './context'
 import getDefaultTemplate from '../../templates/default'
 
@@ -33,7 +33,7 @@ class App {
 
     I18n.loadTranslations(currentUser.locale)
 
-    const uris = await asyncErrorHandler(this._client, getUrisFromSettings, this.settings);
+    const uris = errorHandler(this._client, getUrisFromSettings, this.settings);
 
     render('.loader', getDefaultTemplate(uris))
 
