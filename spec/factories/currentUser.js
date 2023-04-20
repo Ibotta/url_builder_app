@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 /**
  * Generates a Zendesk Current User object with random values
  * Randomly generated values are overidable through default params

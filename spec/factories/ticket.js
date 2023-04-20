@@ -1,4 +1,5 @@
 import customFieldFactory from './customFields';
+import { faker } from '@faker-js/faker';
 
 /**
  * Generates a Zendesk Ticket object with random values

@@ -1,7 +1,7 @@
 /* eslint-env jest, browser */
 import App from '../src/javascripts/modules/app'
 import i18n from '../src/javascripts/lib/i18n'
-import { NO_APP_DATA, APP_DATA } from './mocks/mock'
+import { APP_DATA } from './mocks/mock'
 import createRangePolyfill from './polyfills/createRange'
 import * as helpers from '../src/javascripts/lib/helpers';
 import mockCurrentUser from './factories/currentUser'

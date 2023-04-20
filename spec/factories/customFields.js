@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 /**
  * Generates a Zendesk custom_field object with random values
  * Randomly generated values are overidable through default params
