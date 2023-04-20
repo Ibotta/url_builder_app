@@ -1,5 +1,5 @@
-import mockCurrentUser from '../factories/currentUser';
-import mockTicket from '../factories/ticket';
+import mockCurrentUser from '../factories/currentUser'
+import mockTicket from '../factories/ticket'
 
 /**
  * Globably mocks the client library
@@ -10,22 +10,22 @@ const mockClient = () => {
     get: async (endpoint) => {
       switch (endpoint) {
         case 'currentUser':
-          return mockCurrentUser();
+          return mockCurrentUser()
         case 'ticket':
-          return mockTicket();
+          return mockTicket()
         default:
-          return {};
+          return {}
       }
     },
     invoke: (height) => (height),
     request: async ({ url }) => {
-      if(url.includes('users')) {
-        return mockCurrentUser(true);
+      if (url.includes('users')) {
+        return mockCurrentUser(true)
       } else if (url.includes('tickets')) {
-        return mockTicket(true);
+        return mockTicket(true)
       }
-    },
-  }));
+    }
+  }))
 }
 
-export default mockClient;
+export default mockClient

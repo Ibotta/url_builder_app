@@ -3,7 +3,7 @@ import App from '../src/javascripts/modules/app'
 import i18n from '../src/javascripts/lib/i18n'
 import { APP_DATA } from './mocks/mock'
 import createRangePolyfill from './polyfills/createRange'
-import * as helpers from '../src/javascripts/lib/helpers';
+import * as helpers from '../src/javascripts/lib/helpers'
 import mockCurrentUser from './factories/currentUser'
 import mockTicket from './factories/ticket'
 import client from '../src/javascripts/lib/client'
@@ -32,41 +32,41 @@ describe('App Initialization', () => {
 
   describe('Initialization Failure', () => {
     beforeEach((done) => {
-      jest.spyOn(console, 'error').mockImplementation(() => {});
-      document.body.id = 'app';
+      jest.spyOn(console, 'error').mockImplementation(() => {})
+      document.body.id = 'app'
       document.body.innerHTML = '<section id="main" class="main"><img class="loader" src="spinner.gif"/></section>'
 
-      client.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('a fake error')));
-      app = new App(APP_DATA);
-      errorSpy = jest.spyOn(helpers, 'asyncErrorHandler');
+      client.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('a fake error')))
+      app = new App(APP_DATA)
+      errorSpy = jest.spyOn(helpers, 'asyncErrorHandler')
 
       app.initializePromise
         .then(() => done())
-        .catch(() => done());
-    });
+        .catch(() => done())
+    })
 
     it('should display an error when no templates are input', () => {
-      expect(errorSpy).toBeCalled();
+      expect(errorSpy).toBeCalled()
       expect(document.querySelector('.error')).not.toBe(null)
     })
   })
 
   describe('Initialization Success', () => {
     beforeEach((done) => {
-      document.body.id = 'app';
+      document.body.id = 'app'
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
       app = new App(APP_DATA)
       client.request = jest.fn().mockImplementation(async ({ url }) => {
         if (url.includes('user')) {
-          return mockCurrentUser(true);
-        } else if(url.includes('tickets')) {
-          return mockTicket(true);
+          return mockCurrentUser(true)
+        } else if (url.includes('tickets')) {
+          return mockTicket(true)
         }
-      });
+      })
 
       app.initializePromise
         .then(() => done())
-        .catch(() => done());
+        .catch(() => done())
     })
 
     it('should render main stage with data', () => {

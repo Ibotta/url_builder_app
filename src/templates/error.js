@@ -1,7 +1,7 @@
 /**
  * Template that renders a generic error message and link to our GitHub Issues page.
  */
-export default function(error) {
+export default function (error) {
   return (`
     <div class="error">
       <img src="warning.png" />
@@ -13,5 +13,5 @@ export default function(error) {
         Submit Issue
       </a>
     </div>
-  `);
+  `)
 }

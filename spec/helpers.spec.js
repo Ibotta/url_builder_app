@@ -13,11 +13,6 @@ function mockGetTemplate (item) {
 }
 
 describe('resizeContainer', () => {
-  let clientSpy;
-
-  beforeEach(() => {
-    clientSpy = jest.spyOn(client, 'invoke');
-  });
 
   it('client.invoke has been called', () => {
     resizeContainer()

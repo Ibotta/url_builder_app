@@ -1,4 +1,4 @@
-import getErrorTemplate from '../../templates/error';
+import getErrorTemplate from '../../templates/error'
 import client from '../lib/client'
 
 const MAX_HEIGHT = 1000
@@ -65,11 +65,11 @@ export function escapeSpecialChars (str) {
  * Logs error message and renders our error template.
  * @param {Error} error Exception caught by our error handling functions.
  */
-export function renderErrorTemplate(error) {
-  console.error(error);
+export function renderErrorTemplate (error) {
+  console.error(error)
 
-  render('.loader', getErrorTemplate(error));
-  return resizeContainer(MAX_HEIGHT);
+  render('.loader', getErrorTemplate(error))
+  return resizeContainer(MAX_HEIGHT)
 }
 
 /**
@@ -77,11 +77,11 @@ export function renderErrorTemplate(error) {
  * @param {*} func Synchronous client function call.
  * @param  {...any} params Function parameters used in the call.
  */
-export function errorHandler(func, ...params) {
+export function errorHandler (func, ...params) {
   try {
-    return func(...params);
+    return func(...params)
   } catch (err) {
-    renderErrorTemplate(err);
+    renderErrorTemplate(err)
   }
 }
 
@@ -90,10 +90,10 @@ export function errorHandler(func, ...params) {
  * @param {*} asyncFunction Asynchronous client function call.
  * @param  {...any} params Function parameters used in the call.
  */
-export async function asyncErrorHandler(asyncFunction, ...params) {
+export async function asyncErrorHandler (asyncFunction, ...params) {
   try {
-    return await asyncFunction(...params);
+    return await asyncFunction(...params)
   } catch (err) {
-    renderErrorTemplate(client, err);
+    renderErrorTemplate(client, err)
   }
 }

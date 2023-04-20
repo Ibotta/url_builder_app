@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker'
 /**
  * Generates a Zendesk Current User object with random values
  * Randomly generated values are overidable through default params
@@ -8,16 +8,15 @@ import { faker } from '@faker-js/faker';
  * @returns a new random Zendesk current user object
  */
 const currentUserFactory = (useEndpoint = false, currentUserDefaults = {}) => {
-
   if (useEndpoint) {
     return {
       user: {
         user_fields: {
           field1: null,
           field2: null,
-          field3: null,
+          field3: null
         },
-        ...currentUserDefaults,
+        ...currentUserDefaults
       }
     }
   }
@@ -26,9 +25,9 @@ const currentUserFactory = (useEndpoint = false, currentUserDefaults = {}) => {
       externalId: null,
       id: faker.datatype.number(),
       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      ...currentUserDefaults,
+      ...currentUserDefaults
     }
   }
 }
 
-export default currentUserFactory;
+export default currentUserFactory

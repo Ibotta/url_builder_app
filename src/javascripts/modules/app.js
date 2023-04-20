@@ -1,5 +1,5 @@
 import I18n from '../../javascripts/lib/i18n'
-import { render, resizeContainer, escapeSpecialChars as escape, asyncErrorHandler, errorHandler } from '../../javascripts/lib/helpers'
+import { render, resizeContainer, asyncErrorHandler, errorHandler } from '../../javascripts/lib/helpers'
 import { getUrisFromSettings, getContext, buildTemplatesFromContext } from './context'
 import getDefaultTemplate from '../../templates/default'
 import client from '../lib/client'
@@ -8,7 +8,7 @@ const MAX_HEIGHT = 1000
 
 class App {
   constructor (_appData) {
-    this.settings = _appData.metadata.settings;
+    this.settings = _appData.metadata.settings
 
     this.initializePromise = this.init()
   }
@@ -18,9 +18,9 @@ class App {
 
     I18n.loadTranslations(currentUser.locale)
 
-    const uris = errorHandler(getUrisFromSettings, this.settings);
-    const context = await asyncErrorHandler(getContext);
-    const templates = errorHandler(buildTemplatesFromContext, uris, context);
+    const uris = errorHandler(getUrisFromSettings, this.settings)
+    const context = await asyncErrorHandler(getContext)
+    const templates = errorHandler(buildTemplatesFromContext, uris, context)
 
     render('.loader', getDefaultTemplate(templates))
 
