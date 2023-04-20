@@ -1,5 +1,5 @@
 const path = require('path')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -30,14 +30,15 @@ const externalAssets = {
   ],
   js: [
     'https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js',
-    'https://cdn.jsdelivr.net/g/lodash@4.3.0,handlebarsjs@4.0.5,jquery@2.2.0'
+    'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
+    'https://cdn.jsdelivr.net/jquery/3.0.0/jquery.min.js'
   ]
 }
 
 module.exports = {
   entry: {
     app: [
-      'babel-polyfill',
+      '@babel/polyfill',
       './src/javascripts/locations/ticket_sidebar.js',
       './src/index.css'
     ]
@@ -50,8 +51,10 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react']
         }
       },
       {
@@ -64,7 +67,7 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          {loader: 'css-loader', options: { url: false }},
+          { loader: 'css-loader', options: { url: false } },
           'postcss-loader'
         ]
       }
@@ -73,13 +76,18 @@ module.exports = {
 
   plugins: [
     // Empties the dist folder
-    new CleanWebpackPlugin(['dist/*']),
+    new CleanWebpackPlugin({
+      verbose: true,
+      cleanOnceBeforeBuildPatterns: [path.join(process.cwd(), 'dist/**/*')]
+    }),
 
     // Copy over static assets
-    new CopyWebpackPlugin([
-      { from: 'src/manifest.json', to: '../', flatten: true },
-      { from: 'src/images/*', to: '.', flatten: true }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/manifest.json', to: '../[name][ext]' },
+        { from: 'src/images/*', to: './[name][ext]' }
+      ]
+    }),
 
     new MiniCssExtractPlugin({
       filename: '[name].css'

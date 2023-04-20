@@ -1,6 +1,6 @@
 import currentUserFactory from "./factories/currentUser";
 import ticketFactory from "./factories/ticket";
-import getContext, { assignTicketFields, processUserObject } from "../src/javascripts/modules/context";
+import { getContext, assignTicketFields, processUserObject } from "../src/javascripts/modules/context";
 import client from "../src/javascripts/lib/client";
 
 describe('#context', () => {

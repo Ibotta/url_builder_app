@@ -1,7 +1,11 @@
-import App from '../modules/app'
-import client from '../lib/client';
-import { errorHandler } from '../lib/helpers';
+// need to import basic garden css styles
+import '@zendeskgarden/css-bedrock'
 
+import { renderErrorTemplate } from '../lib/helpers';
+import App from '../modules/app'
+
+/* global ZAFClient */
+const client = ZAFClient.init()
 let fieldsToWatch = [];
 let app = {};
 
@@ -19,13 +23,12 @@ function getFieldsToWatchFromSettings({ uri_templates }) {
 /**
  * Event Listener that waits for app to be created; initiates the URL Builder app..
  */
-client.on('app.registered', appData => {
+client.on('app.registered', function (appData) {
   app = appData;
-  fieldsToWatch = errorHandler(getFieldsToWatchFromSettings, appData.metadata.settings);
+  fieldsToWatch = getFieldsToWatchFromSettings(appData.metadata.settings);
 
   return new App(appData);
 });
-
 
 /**
  * Event listener that waits for any change events.  Reinitiates the app.
@@ -33,8 +36,7 @@ client.on('app.registered', appData => {
  * We listen for the event, and update the app in case the URL Template data has changed.
  */
 client.on('*.changed', e => {
-  if (_.contains(fieldsToWatch, e.propertyName)) {
+  if (_.includes(fieldsToWatch, e.propertyName)) {
     return new App(app);
   }
 });
-

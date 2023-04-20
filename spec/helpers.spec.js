@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { templatingLoop, render, escapeSpecialChars as escape, resizeAppContainer } from '../src/javascripts/lib/helpers'
+import { resizeContainer, templatingLoop, render, escapeSpecialChars as escape } from '../src/javascripts/lib/helpers'
 import createRangePolyfill from './polyfills/createRange'
 import client from '../src/javascripts/lib/client'
 
@@ -12,29 +12,17 @@ function mockGetTemplate (item) {
   return `${item}-`
 }
 
-describe('resizeAppContainer', () => {
-  let documentSpy;
+describe('resizeContainer', () => {
   let clientSpy;
 
   beforeEach(() => {
-    document.body.id = 'app'
     clientSpy = jest.spyOn(client, 'invoke');
   });
 
-  it('resizes container to the size of app body', () => {
-    document.id = 'app';
-    document.body.innerHTML = '<section><div><h1>TEST HEADER</h1></div></section>';
-    const prevHeight = document.getElementById('app');
-    const nextHeight = resizeAppContainer();
-
-    expect(prevHeight).not.toEqual(nextHeight);
-    expect(clientSpy).toHaveBeenCalled();
-  });
-
-  it('resizes container from inputted dimensions', () => {
-    resizeAppContainer();
-    expect(clientSpy).toHaveBeenCalled();
-  });
+  it('client.invoke has been called', () => {
+    resizeContainer()
+    expect(client.invoke).toHaveBeenCalled()
+  })
 })
 
 describe('templatingLoop', () => {
@@ -52,9 +40,9 @@ describe('render', () => {
     document.body.innerHTML = '<div id="placeholder"></div>'
     expect(document.querySelectorAll('#placeholder').length).toBe(1)
 
-    render('#placeholder', '<div id="main"></div>')
+    render('#placeholder', '<div id="app"></div>')
     expect(document.querySelectorAll('#placeholder').length).toBe(0)
-    expect(document.querySelectorAll('#main').length).toBe(1)
+    expect(document.querySelectorAll('#app').length).toBe(1)
   })
 })
 

@@ -9,8 +9,8 @@ const customFieldFactory = (num = 5, fieldDefaults = {}) => {
   const customFields = [];
   for (let i = 0; i < num; i += 1) {
     customFields.push({
-      id: faker.random.number(),
-      value: `${faker.random.number()}`,
+      id: faker.datatype.number(),
+      value: `${faker.datatype.number()}`,
       ...fieldDefaults
     });
   }

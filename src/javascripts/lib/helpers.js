@@ -1,23 +1,16 @@
-import client from '../lib/client';
 import getErrorTemplate from '../../templates/error';
+import client from '../lib/client'
+
+const MAX_HEIGHT = 1000
 
 /**
- * Resize App Container
- *
- * Resizes the app based off of the app element's size
- * Allows for custom, overridable, dimensions to be passed as well
- * @param {ZAFClient} client ZAFClient object
- * @param {...Object} dimensions - an optional param to override
- *                                 automatic size calculation
+ * Resize App container
+ * @param {Number} max max height available to resize to
+ * @return {Promise} will resolved after resize
  */
-export function resizeAppContainer (dimensions) {
-  if (dimensions) {
-    return client.invoke('resize', { ...dimensions })
-  }
-
-  const { clientHeight = '300px' } = document.getElementById('app');
-
-  return client.invoke('resize', { height: clientHeight });
+export function resizeContainer (max = Number.POSITIVE_INFINITY) {
+  const newHeight = Math.min(document.body.clientHeight, max)
+  return client.invoke('resize', { height: newHeight })
 }
 
 /**
@@ -76,7 +69,7 @@ export function renderErrorTemplate(error) {
   console.error(error);
 
   render('.loader', getErrorTemplate(error));
-  return resizeAppContainer();
+  return resizeContainer(MAX_HEIGHT);
 }
 
 /**
@@ -101,6 +94,6 @@ export async function asyncErrorHandler(asyncFunction, ...params) {
   try {
     return await asyncFunction(...params);
   } catch (err) {
-    renderErrorTemplate(err);
+    renderErrorTemplate(client, err);
   }
 }

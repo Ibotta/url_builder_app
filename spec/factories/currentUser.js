@@ -23,7 +23,7 @@ const currentUserFactory = (useEndpoint = false, currentUserDefaults = {}) => {
   return {
     currentUser: {
       externalId: null,
-      id: faker.random.number(),
+      id: faker.datatype.number(),
       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       ...currentUserDefaults,
     }

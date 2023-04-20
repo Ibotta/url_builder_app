@@ -24,8 +24,8 @@ const ticketFactory = (useEndpoint = false, ticketDefaults = {}, requesterDefaul
   }
 
   const requester = {
-    externalId: `${faker.random.number()}`,
-    id: faker.random.number(),
+    externalId: `${faker.datatype.number()}`,
+    id: faker.datatype.number(),
     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
     ...requesterDefaults,
   };
@@ -36,7 +36,7 @@ const ticketFactory = (useEndpoint = false, ticketDefaults = {}, requesterDefaul
     user: {
       externalId: null,
       firstName: assigneeFirstName,
-      id: faker.random.number(),
+      id: faker.datatype.number(),
       lastName: assigneeLastName,
       name: `${assigneeFirstName} ${assigneeLastName}`,
       ...assigneeUserDefault
@@ -45,10 +45,10 @@ const ticketFactory = (useEndpoint = false, ticketDefaults = {}, requesterDefaul
 
   return {
     ticket: {
-      id: faker.random.number(),
+      id: faker.datatype.number(),
       assignee: assignee,
       requester: requester,
-      externalId: `${faker.random.number()}`,
+      externalId: `${faker.datatype.number()}`,
       ...ticketDefaults,
     }
   }
