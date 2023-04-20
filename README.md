@@ -1,7 +1,5 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ae9af0fae166c51f8f8a/maintainability)](https://codeclimate.com/repos/5d9242ca2d833400b1000180/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ae9af0fae166c51f8f8a/test_coverage)](https://codeclimate.com/repos/5d9242ca2d833400b1000180/test_coverage)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](.github/CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
 # URL Builder App V2
 
@@ -9,8 +7,8 @@
 
 A Zendesk App to help you generate links for agents.
 
-## Changes from V1 to V2
-We've included some helpful information about what has changed in the V2 of this app in our [Wiki](https://github.com/Ibotta/url_builder_app/wiki/Changes-from-V1-to-V2)
+## Changes from V1 to V2 (2019)
+We've included some helpful information about what has changed in the V2 of this app in this [doc](./.github/V1_TO_V2_NOTES.md)
 
 ## Usage Instructions:
 
@@ -70,6 +68,7 @@ This example will generate the following HTML inside the app:
 
 ----
 ### Available Placeholders
+```
 * {{ticket.id}} //not available for new tickets
 * {{ticket.description}}
 * {{ticket.requester.id}}
@@ -95,6 +94,7 @@ This example will generate the following HTML inside the app:
 * {{currentUser.externalId}}
 * {{currentUser.firstName}}
 * {{currentUser.lastName}}
+```
 
 ## Issues
 To submit an issue, please follow the [available template](/.github/ISSUE_TEMPLATE.md).
