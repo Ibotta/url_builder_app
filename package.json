@@ -1,13 +1,14 @@
 {
-  "name": "app_scaffold",
+  "name": "url_builder_app",
   "version": "2.0.0",
-  "description": "A scaffold for developers to build ZAF v2 apps",
+  "description": "A Zendesk plugin to render URLs",
   "keywords": [
     "zendesk",
     "app",
-    "framework"
+    "framework",
+    "url"
   ],
-  "author": "Zendesk",
+  "author": "Ibotta",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=18.12.1"
@@ -31,6 +32,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
+    "faker": "^4.1.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
