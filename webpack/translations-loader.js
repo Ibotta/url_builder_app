@@ -51,7 +51,7 @@ function translationFlatten (object, currentKeys = []) {
 }
 /* eslint-enable array-callback-return */
 
-function TranslationsLoader (content) {
+export default function TranslationsLoader (content) {
   let translationsInput
   try {
     translationsInput = JSON.parse(content)
@@ -64,5 +64,3 @@ function TranslationsLoader (content) {
 
   return `module.exports = ${JSON.stringify(compiledTranslations)}`
 }
-
-module.exports = TranslationsLoader

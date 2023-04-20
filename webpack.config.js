@@ -1,10 +1,14 @@
-import { resolve, join } from 'path'
+import { resolve, join, dirname } from 'path'
+import { fileURLToPath } from 'url';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
-import MiniCssExtractPlugin, { loader as _loader } from 'mini-css-extract-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import TranslationsPlugin from './webpack/translations-plugin'
-import { devDependencies } from './package.json'
+import devDependencies from './package.json' assert { type: 'json' }
+import { TranslationsPlugin } from './webpack/translations-plugin.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // this function reads Zendesk Garden npm dependencies from package.json and
 // creates a jsDelivr url
@@ -46,6 +50,7 @@ export const output = {
   filename: '[name].js',
   path: resolve(__dirname, 'dist/assets')
 }
+
 export const module = {
   rules: [
     {
@@ -65,8 +70,10 @@ export const module = {
     {
       test: /\.(sa|sc|c)ss$/,
       use: [
-        _loader,
-        { loader: 'css-loader', options: { url: false } },
+        { 
+          loader: MiniCssExtractPlugin.loader,
+          options: { url: false } 
+        },
         'postcss-loader'
       ]
     }

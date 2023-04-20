@@ -1,5 +1,6 @@
-const path = require('path')
-const fs = require('fs')
+import { resolve } from 'path'
+import { readFileSync } from 'fs'
+
 const JS_INDENT = 2
 
 const marketplaceKeys = [
@@ -11,7 +12,7 @@ const marketplaceKeys = [
   'parameters'
 ]
 
-class TranslationsPlugin {
+export class TranslationsPlugin {
   constructor (options) {
     this.options = options
   }
@@ -32,7 +33,7 @@ class TranslationsPlugin {
 function buildMarketplaceTranslationFile (filename, filepath) {
   let translationsInput
   try {
-    translationsInput = JSON.parse(fs.readFileSync(path.resolve(filepath, filename)))
+    translationsInput = JSON.parse(readFileSync(resolve(filepath, filename)))
   } catch (err) {
     console.error(err)
     process.exit(1)
@@ -63,5 +64,3 @@ function extractMarketplaceTranslation (translations, filename) {
 
   return JSON.stringify(translationsOutput, null, JS_INDENT)
 }
-
-module.exports = TranslationsPlugin
