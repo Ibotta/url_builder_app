@@ -1,10 +1,15 @@
 {
   "app": {
-    "name": "Example App",
-    "short_description": "Short Description",
-    "long_description": "Long Description",
-    "installation_instructions": "Configure the following app settings, then click Install:...",
-    "title": "Example App"
+    "name": "URL Builder App V2",
+    "short_description": "Generate Buttons from a list of URLs",
+    "long_description": "Generate Buttons from a list of URLs",
+    "installation_instructions": "Use the install button",
+    "parameters": {
+      "uri_templates": {
+        "label": "A JSON Array of URLs.",
+        "helpText": "See [our README](https://github.com/Ibotta/url_builder_app/blob/master/README.md) for more information."
+      }
+    }
   },
   "default": {
     "organizations": "organizations"
