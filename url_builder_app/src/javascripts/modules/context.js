@@ -45,7 +45,7 @@ export function assignTicketFields(ticket, ticketFields) {
  * Adds the firstName, lastName, and user_fields objects to our existing User objets.
  * @param {Object} user - assignee, requester, or current user objects.
  */
-export async function processUserObject(client, user) {
+export async function processUserObject(user) {
   const [firstName = '', lastName = ''] = (user.name || '').split(' ');
   const { user: { user_fields } } = await client.request(getUserData(user.id));
 
@@ -72,14 +72,14 @@ export async function getContext() {
     context.ticket = ticket;
 
     if (ticket.requester) {
-      context.ticket.requester = await processUserObject(client, ticket.requester);
+      context.ticket.requester = await processUserObject(ticket.requester);
     }
 
     if (ticket.assignee.user) {
-      context.ticket.assignee.user = await processUserObject(client, ticket.assignee.user);
+      context.ticket.assignee.user = await processUserObject(ticket.assignee.user);
     }
 
-    context.currentUser = await processUserObject(client, currentUser);
+    context.currentUser = await processUserObject(currentUser);
 
     return context;
   };
