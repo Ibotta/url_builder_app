@@ -30,7 +30,7 @@ const zendeskGardenJsDelivrUrl = (function () {
 const externalAssets = {
   css: [
     zendeskGardenJsDelivrUrl,
-    'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css'
+    'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'
   ],
   js: [
     'https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js',

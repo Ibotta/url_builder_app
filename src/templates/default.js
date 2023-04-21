@@ -7,7 +7,7 @@ import { templatingLoop as loop } from '../javascripts/lib/helpers.js'
 function uriMarkup (uri) {
   return (`
     <li>
-      <a href="${uri.url}" target="_blank" class="btn btn-url">${uri.title}</a>
+      <a href="${uri.url}" target="_blank" class="btn btn-default btn-url">${uri.title}</a>
     </li>
   `)
 }
@@ -18,7 +18,7 @@ function uriMarkup (uri) {
  */
 export default function (templateUris) {
   return (`
-    <div id="well-urls" class="well well-small">
+    <div id="well-urls" class="well well-sm">
       <ul class="btn-list">${loop(templateUris, uriMarkup)}</ul>
     </div>
   `)
