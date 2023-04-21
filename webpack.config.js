@@ -1,11 +1,11 @@
 import { resolve, join, dirname } from 'path'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import devDependencies from './package.json' assert { type: 'json' }
-import { TranslationsPlugin } from './webpack/translations-plugin.js';
+import { TranslationsPlugin } from './webpack/translations-plugin.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -38,75 +38,78 @@ const externalAssets = {
     'https://cdn.jsdelivr.net/jquery/3.0.0/jquery.min.js'
   ]
 }
-
-export const entry = {
-  app: [
-    '@babel/polyfill',
-    './src/javascripts/locations/ticket_sidebar.js',
-    './src/index.css'
-  ]
-}
-export const output = {
-  filename: '[name].js',
-  path: resolve(__dirname, 'dist/assets')
-}
-
-export const module = {
-  rules: [
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      options: {
-        presets: ['@babel/preset-env', '@babel/preset-react']
-      }
-    },
-    {
-      type: 'javascript/auto',
-      test: /\.json$/,
-      include: resolve(__dirname, './src/translations'),
-      use: './webpack/translations-loader'
-    },
-    {
-      test: /\.(sa|sc|c)ss$/,
-      use: [
-        { 
-          loader: MiniCssExtractPlugin.loader,
-          options: { url: false } 
-        },
-        'postcss-loader'
-      ]
-    }
-  ]
-}
-export const plugins = [
-  // Empties the dist folder
-  new CleanWebpackPlugin({
-    verbose: true,
-    cleanOnceBeforeBuildPatterns: [join(process.cwd(), 'dist/**/*')]
-  }),
-
-  // Copy over static assets
-  new CopyWebpackPlugin({
-    patterns: [
-      { from: 'src/manifest.json', to: '../[name][ext]' },
-      { from: 'src/images/*', to: './[name][ext]' }
+export default {
+  "entry": {
+    app: [
+      'core-js/stable',
+      'regenerator-runtime/runtime',
+      './src/javascripts/locations/ticket_sidebar.js',
     ]
-  }),
+  },
+  
+  "output": {
+    filename: '[name].js',
+    path: resolve(__dirname, 'dist/assets')
+  },
 
-  new MiniCssExtractPlugin({
-    filename: '[name].css'
-  }),
+  "module": {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react']
+        }
+      },
+      {
+        type: 'javascript/auto',
+        test: /\.json$/,
+        include: resolve(__dirname, './src/translations'),
+        use: './webpack/translations-loader'
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          { 
+            loader: MiniCssExtractPlugin.loader,
+            options: { url: false } 
+          },
+          'postcss-loader'
+        ]
+      }
+    ]
+  },
 
-  new TranslationsPlugin({
-    path: resolve(__dirname, './src/translations')
-  }),
+  "plugins": [
+    // Empties the dist folder
+    new CleanWebpackPlugin({
+      verbose: true,
+      cleanOnceBeforeBuildPatterns: [join(process.cwd(), 'dist/**/*')]
+    }),
 
-  new HtmlWebpackPlugin({
-    warning: 'AUTOMATICALLY GENERATED FROM ./src/templates/iframe.html - DO NOT MODIFY THIS FILE DIRECTLY',
-    vendorCss: externalAssets.css.filter(path => !!path),
-    vendorJs: externalAssets.js,
-    template: './src/templates/iframe.html',
-    filename: 'iframe.html'
-  })
-]
+    // Copy over static assets
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/manifest.json', to: '../[name][ext]' },
+        { from: 'src/images/*', to: './[name][ext]' }
+      ]
+    }),
+
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
+
+    new TranslationsPlugin({
+      path: resolve(__dirname, './src/translations')
+    }),
+
+    new HtmlWebpackPlugin({
+      warning: 'AUTOMATICALLY GENERATED FROM ./src/templates/iframe.html - DO NOT MODIFY THIS FILE DIRECTLY',
+      vendorCss: externalAssets.css.filter(path => !!path),
+      vendorJs: externalAssets.js,
+      template: './src/templates/iframe.html',
+      filename: 'iframe.html'
+    })
+  ]
+}
