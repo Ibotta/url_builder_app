@@ -1,3 +1,5 @@
+@import '@zendeskgarden/css-bedrock';
+
 .main {
   height: 100%;
   min-height: 100%;
@@ -30,6 +32,7 @@
   background-color: #ffffff;
   background-image: none;
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .btn-list {
@@ -45,4 +48,8 @@
 
 html {
   overflow: hidden;
+}
+
+ul {  
+  list-style-type: none;  
 }

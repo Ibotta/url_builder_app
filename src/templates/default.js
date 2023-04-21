@@ -7,9 +7,7 @@ import { templatingLoop as loop } from '../javascripts/lib/helpers.js'
 function uriMarkup (uri) {
   return (`
     <li>
-      <strong class="u-font-family-system u-semibold">
-        <a href="${uri.url}" target="_blank" class="btn btn-url">${uri.title}</a>
-      </strong>
+      <a href="${uri.url}" target="_blank" class="btn btn-url">${uri.title}</a>
     </li>
   `)
 }
