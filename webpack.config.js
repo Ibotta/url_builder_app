@@ -4,7 +4,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import devDependencies from './package.json' assert { type: 'json' }
+import dependencies from './package.json' assert { type: 'json' }
 import { TranslationsPlugin } from './webpack/translations-plugin.js'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -13,9 +13,9 @@ const __dirname = dirname(__filename);
 // this function reads Zendesk Garden npm dependencies from package.json and
 // creates a jsDelivr url
 const zendeskGardenJsDelivrUrl = (function () {
-  const pkg = Object.keys(devDependencies).filter(item => item.includes('@zendeskgarden/css'))
+  const pkg = Object.keys(dependencies).filter(item => item.includes('@zendeskgarden/css'))
   const getPkgName = (url, pkg) => {
-    const version = devDependencies[pkg]
+    const version = dependencies[pkg]
       .replace(/^[\^~]/g, '')
       .replace(/\.\d$/, '')
     url = `${url}npm/${pkg}@${version},`
