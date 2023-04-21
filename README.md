@@ -1,11 +1,14 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
-# URL Builder App V2
+# URL Builder App V3
 
 ## Description:
 
 A Zendesk App to help you generate links for agents.
+
+## Changes from V2 to V3 (2023)
+V3 updates the app to use Node 18 and ZCLI instead of the ZAT client.
 
 ## Changes from V1 to V2 (2019)
 We've included some helpful information about what has changed in the V2 of this app in this [doc](./.github/V1_TO_V2_NOTES.md)
@@ -16,26 +19,26 @@ We've included some helpful information about what has changed in the V2 of this
 2. Click "Install".
 3. Similarly, you can reach this screen by going to your installed apps, and clicking "Change Settings".
 
-![change-settings](assets/change-settings.png)
+![change-settings](.github/images/change-settings.png)
 
 4. Select your account to install the app.
 5. Confirm the title; this will display in the URL Builder App box above the links:
 
-![installation-title](assets/installation-title.png)
+![installation-title](.github/images/installation-title.png)
 
 6. The second box is for the URLS, and uses an array of JSON, described below. In this example, note we are using a placeholder `{{ticket.requester.id}}`.
 
-![json-array-of-urls](assets/json-array-of-urls.png)
+![json-array-of-urls](.github/images/json-array-of-urls.png)
 
 7. Optionally enable role restrictions if these URLs are not appropriate for all agents.
 8. Once your JSON is in place, click `Install`.
 9. Open a new browser to test your results.
 
-![links](assets/links.png)
+![links](.github/images/links.png)
 
 If we highlight the `User Info` link, we see the placeholder `ticket.requester.id` has been replaced with ticket requester's ID of `377511204654`.
 
-![example-url](assets/example-url.png)
+![example-url](.github/images/example-url.png)
 
 ## JSON Array of URLs:
 
