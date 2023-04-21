@@ -1,3 +1,3 @@
-import mockClient from './spec/mocks/clientMock'
+import mockClient from './spec/mocks/clientMock.js'
 
 mockClient()

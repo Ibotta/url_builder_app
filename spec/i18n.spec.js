@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import i18n from '../src/javascripts/lib/i18n'
+import i18n from '../src/javascripts/lib/i18n.js'
 
 const mockEN = {
   one: 'the first translation',

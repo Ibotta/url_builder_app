@@ -1,4 +1,4 @@
-import App from '../modules/app'
+import App from '../modules/app.js'
 import _ from 'lodash'
 
 /* global ZAFClient */

@@ -1,5 +1,5 @@
-import { getTicketData, getUserData, getOrganizationData } from '../lib/api'
-import client from '../lib/client'
+import { getTicketData, getUserData, getOrganizationData } from '../lib/api.js'
+import client from '../lib/client.js'
 import _ from 'lodash'
 
 const TEMPLATE_OPTIONS = { interpolate: /\{\{(.+?)\}\}/g }

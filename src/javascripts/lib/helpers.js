@@ -1,5 +1,5 @@
-import getErrorTemplate from '../../templates/error'
-import client from '../lib/client'
+import getErrorTemplate from '../../templates/error.js'
+import client from '../lib/client.js'
 
 const MAX_HEIGHT = 1000
 

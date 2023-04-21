@@ -1,7 +1,7 @@
-import currentUserFactory from './factories/currentUser'
-import ticketFactory from './factories/ticket'
-import { getContext, assignTicketFields, processUserObject } from '../src/javascripts/modules/context'
-import client from '../src/javascripts/lib/client'
+import currentUserFactory from './factories/currentUser.js'
+import ticketFactory from './factories/ticket.js'
+import { getContext, assignTicketFields, processUserObject } from '../src/javascripts/modules/context.js'
+import client from '../src/javascripts/lib/client.js'
 
 describe('#context', () => {
   describe('#assignTicketFields', () => {

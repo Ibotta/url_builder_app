@@ -1,7 +1,7 @@
 /* eslint-env jest */
-import { resizeContainer, templatingLoop, render, escapeSpecialChars as escape } from '../src/javascripts/lib/helpers'
-import createRangePolyfill from './polyfills/createRange'
-import client from '../src/javascripts/lib/client'
+import { resizeContainer, templatingLoop, render, escapeSpecialChars as escape } from '../src/javascripts/lib/helpers.js'
+import createRangePolyfill from './polyfills/createRange.js'
+import client from '../src/javascripts/lib/client.js'
 
 if (!document.createRange) {
   createRangePolyfill()

@@ -1,8 +1,8 @@
-import I18n from '../../javascripts/lib/i18n'
-import { render, resizeContainer, asyncErrorHandler, errorHandler } from '../../javascripts/lib/helpers'
-import { getUrisFromSettings, getContext, buildTemplatesFromContext } from './context'
-import getDefaultTemplate from '../../templates/default'
-import client from '../lib/client'
+import I18n from '../../javascripts/lib/i18n.js'
+import { render, resizeContainer, asyncErrorHandler, errorHandler } from '../../javascripts/lib/helpers.js'
+import { getUrisFromSettings, getContext, buildTemplatesFromContext } from './context.js'
+import getDefaultTemplate from '../../templates/default.js'
+import client from '../lib/client.js'
 
 const MAX_HEIGHT = 1000
 

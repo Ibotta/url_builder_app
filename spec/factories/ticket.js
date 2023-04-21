@@ -1,4 +1,4 @@
-import customFieldFactory from './customFields'
+import customFieldFactory from './customFields.js'
 import { faker } from '@faker-js/faker'
 
 /**

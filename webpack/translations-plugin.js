@@ -12,7 +12,7 @@ const marketplaceKeys = [
   'parameters'
 ]
 
-export default class TranslationsPlugin {
+export class TranslationsPlugin {
   constructor (options) {
     this.options = options
   }

@@ -1,5 +1,5 @@
-import mockCurrentUser from '../factories/currentUser'
-import mockTicket from '../factories/ticket'
+import mockCurrentUser from '../factories/currentUser.js'
+import mockTicket from '../factories/ticket.js'
 
 /**
  * Globably mocks the client library

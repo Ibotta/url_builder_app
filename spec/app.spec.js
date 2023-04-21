@@ -1,12 +1,12 @@
 /* eslint-env jest, browser */
-import App from '../src/javascripts/modules/app'
-import i18n from '../src/javascripts/lib/i18n'
-import { APP_DATA } from './mocks/mock'
-import createRangePolyfill from './polyfills/createRange'
-import * as helpers from '../src/javascripts/lib/helpers'
-import mockCurrentUser from './factories/currentUser'
-import mockTicket from './factories/ticket'
-import client from '../src/javascripts/lib/client'
+import App from '../src/javascripts/modules/app.js'
+import i18n from '../src/javascripts/lib/i18n.js'
+import { APP_DATA } from './mocks/mock.js'
+import createRangePolyfill from './polyfills/createRange.js'
+import * as helpers from '../src/javascripts/lib/helpers.js'
+import mockCurrentUser from './factories/currentUser.js'
+import mockTicket from './factories/ticket.js'
+import client from '../src/javascripts/lib/client.js'
 
 const mockEN = {
   'app.name': 'Example App',
