@@ -44,6 +44,7 @@ export default {
       'core-js/stable',
       'regenerator-runtime/runtime',
       './src/javascripts/locations/ticket_sidebar.js',
+      './src/index.css'
     ]
   },
   
@@ -71,9 +72,10 @@ export default {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          { 
-            loader: MiniCssExtractPlugin.loader,
-            options: { url: false } 
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { url: false }
           },
           'postcss-loader'
         ]
