@@ -44,7 +44,7 @@ export default {
       'core-js/stable',
       'regenerator-runtime/runtime',
       './src/javascripts/locations/ticket_sidebar.js',
-      './src/index.css'
+      './src/styles/index.css'
     ]
   },
   
@@ -70,7 +70,7 @@ export default {
         use: './webpack/translations-loader'
       },
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.(sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           {

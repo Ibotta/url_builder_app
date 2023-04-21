@@ -7,7 +7,7 @@ import { templatingLoop as loop } from '../javascripts/lib/helpers.js'
 function uriMarkup (uri) {
   return (`
     <li>
-      <a href="${uri.url}" target="_blank" class="btn btn-default btn-url">${uri.title}</a>
+      <a href="${uri.url}" target="_blank" class="btn btn-default btn-url" role="button">${uri.title}</a>
     </li>
   `)
 }
