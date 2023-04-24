@@ -1,6 +1,6 @@
-![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+![Build Status](https://github.com/github/docs/actions/workflows/build.yml/badge.svg)
+![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)(LICENSE)
+![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)(code_of_conduct.md)
 
 # URL Builder App V3
 
