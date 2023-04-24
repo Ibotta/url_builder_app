@@ -15,6 +15,12 @@ jobs:
       matrix:
         node-version: [18]
 
+    # Used for zcli apps:validate
+    env:
+      ZENDESK_SUBDOMAIN: ${{  secrets.SUBDOMAIN  }}
+      ZENDESK_EMAIL: ${{  secrets.EMAIL  }}
+      ZENDESK_API_TOKEN: ${{  secrets.API_TOKEN  }}
+
     steps:
       - uses: actions/checkout@v3
 
@@ -28,8 +34,7 @@ jobs:
       - run: npm test
 
       # Reference: https://developer.zendesk.com/documentation/apps/build-an-app/create-a-cicd-pipeline-for-a-zendesk-app
-      # Can't use this without logging in, but keep for later.
-      # - name: Install zcli
-      #   run: npm i @zendesk/zcli -g
-      # - name: Validate the app
-      #   run: zcli apps:validate dist
+      - name: Install zcli
+        run: npm i @zendesk/zcli -g
+      - name: Validate the app
+        run: zcli apps:validate dist
