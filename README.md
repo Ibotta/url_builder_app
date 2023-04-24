@@ -53,8 +53,10 @@ This example will generate the following HTML inside the app:
 </ul>
 ```
 
-----
-### Available Placeholders
+### Sample Placeholders
+
+Below is a list of just a few of the available placeholders.  To see the full list of fields, please see the [Zendesk Apps Reference - API Reference](https://developer.zendesk.com/api-reference/apps/introduction/).  You can find fields available to [all locations](https://developer.zendesk.com/api-reference/apps/apps-support-api/all_locations/), and the [ticket and new ticket sidebar](https://developer.zendesk.com/api-reference/apps/apps-support-api/ticket_sidebar/).
+
 ```
 * {{ticket.id}} //not available for new tickets
 * {{ticket.description}}

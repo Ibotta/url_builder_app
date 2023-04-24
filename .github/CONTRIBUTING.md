@@ -1,4 +1,4 @@
-## How to contribute to the URL Builder App V2
+## How to contribute to the URL Builder App V3
 
 ### Pull Requests
 When making a pull request, be sure the merging repo is `ibotta/url_builder_app` and not `zendesklabs/url_builder_app`!
@@ -25,10 +25,10 @@ When making a pull request, be sure the merging repo is `ibotta/url_builder_app`
 
 `npm run package` - This will build the `dist` folder locally after `validate` has passed.  `dist/tmp` will contain the ZIP you need to upload your version of the app.
 
-### Testing changes in Sandbox/Production using ZAT Server
+### Testing changes using ZCLI
 
-Zendesk Apps Tools is a command-line tool offered by Zendesk to create, test, validate and build Zendesk Apps.  It is also used to test local changes on your Zendesk page in sandbox or production.  You can find out more [in the Apps Developer Guide](https://developer.zendesk.com/apps/docs/developer-guide/zat)
+The Zendesk Command Lind Interface is the replace fo Zendesk Apps Tools (ZAT) and is used to build, test, and package Zendesk apps.  You can find out more [in the Developer Docs](https://developer.zendesk.com/documentation/apps/getting-started/using-zcli/)
 
-Thanks! :heart: :heart: :heart:
+### API Reference
 
-The Ibotta Dev Team
+If you are interested in updating or extending the API references, you can check out the [Zendesk API Reference](https://developer.zendesk.com/api-reference/).
