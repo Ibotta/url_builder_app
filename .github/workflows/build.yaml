@@ -28,7 +28,8 @@ jobs:
       - run: npm test
 
       # Reference: https://developer.zendesk.com/documentation/apps/build-an-app/create-a-cicd-pipeline-for-a-zendesk-app
-      - name: Install zcli
-        run: npm i @zendesk/zcli -g
-      - name: Validate the app
-        run: zcli apps:validate dist
+      # Can't use this without logging in, but keep for later.
+      # - name: Install zcli
+      #   run: npm i @zendesk/zcli -g
+      # - name: Validate the app
+      #   run: zcli apps:validate dist
