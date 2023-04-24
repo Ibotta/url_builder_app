@@ -40,9 +40,7 @@ describe('App Initialization', () => {
       app = new App(APP_DATA)
       errorSpy = jest.spyOn(helpers, 'asyncErrorHandler')
 
-      app.initializePromise
-        .then(() => done())
-        .catch(() => done())
+      app.initializePromise.finally(done())
     })
 
     it('should display an error when no templates are input', () => {
@@ -64,9 +62,7 @@ describe('App Initialization', () => {
         }
       })
 
-      app.initializePromise
-        .then(() => done())
-        .catch(() => done())
+      app.initializePromise.finally(done())
     })
 
     it('should render main stage with data', () => {
