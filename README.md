@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/Ibotta/url_builder_app/actions/workflows/build.yaml/badge.svg)](https://github.com/Ibotta/url_builder_app/actions/workflows/build.yaml)
+[![Build](https://github.com/Ibotta/url_builder_app/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/Ibotta/url_builder_app/actions/workflows/build.yaml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
