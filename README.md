@@ -14,17 +14,29 @@ A Zendesk App to help you generate links for agents.
 "zcli": ">=1.0.0-beta.32"
 ```
 
-# Usage Instructions 
+## Usage 
+### Deploying from ZIP
 
-## Build, Test, and Upload
+To quickly install this application, navigate to the latest releases and download the attached `app-<DATE>.zip`.  You can upload this to Zendesk 
+Attached to the latest release is the `app-<DATE>.zip` asset that can be [uploaded to your Zendesk instance](https://developer.zendesk.com/documentation/apps/getting-started/uploading-and-installing-a-private-app/#uploading-and-installing-a-private-app-in-zendesk):
 
-This app is not currently available in the Zendesk App Marketplace.  However, you can upload a copy of it to your Zendesk instance by following the instructions in [deployment docs](./.github/DEPLOY.md)..
+1. In Admin Center, click the Apps and integrations icon () in the sidebar, then select Apps > Zendesk Support apps.
+2. Click Upload App.
+3. Enter a Name for the app.
+4. Click Choose file and select the zip file for your private app.
+5. Click Save.
+6. In the pop-up box that appears, click Agree and upload this App.
+7. When prompted, click Install.
 
-## Changing Settings
+#### Build, Test, and Upload
+
+If you are interested in extending the app or simply building from source, check out the [CONTRIBUTING](./.github/CONTRIBUTING.md#compile-and-deploy-from-source) docs.
+
+### Changing Settings
 
 Once the app is uploaded, you can Install it to the configured areas of Zendesk.  You can update the JSON array by entering the Zendesk Admin Center > Apps & Integrations > Private Apps > (Whatever you named the app, or URL BuildeR app V3 by default).
 
-## Configuring the JSON Array of URLs
+### Configuring the JSON Array of URLs
 
 The following is an example of what can be entered into this app's settings:
 
@@ -55,24 +67,20 @@ This example will generate the following HTML inside the app:
 
 ### Sample Placeholders
 
-Below is a list of just a few of the available placeholders.  To see the full list of fields, please see the [Zendesk Apps Reference - API Reference](https://developer.zendesk.com/api-reference/apps/introduction/).  You can find fields available to [all locations](https://developer.zendesk.com/api-reference/apps/apps-support-api/all_locations/), and the [ticket and new ticket sidebar](https://developer.zendesk.com/api-reference/apps/apps-support-api/ticket_sidebar/).
+Below is a list of just a few of the available placeholders.  To see the full list of fields, please see the [Zendesk Apps Reference - API Reference](https://developer.zendesk.com/api-reference/apps/introduction/).  You can find fields available to [all locations](https://developer.zendesk.com/api-reference/apps/apps-support-api/all_locations/) and the [ticketsidebar](https://developer.zendesk.com/api-reference/apps/apps-support-api/ticket_sidebar/).
 
 ```
-* {{ticket.id}} //not available for new tickets
+* {{ticket.id}}
 * {{ticket.description}}
 * {{ticket.requester.id}}
 * {{ticket.requester.name}}
 * {{ticket.requester.email}}
 * {{ticket.requester.externalId}}
-* {{ticket.requester.firstName}}
-* {{ticket.requester.lastName}}
 * {{ticket.requester.user_fields.YYY}} = custom user fields can be used
 * {{ticket.assignee.user.id}}
 * {{ticket.assignee.user.name}}
 * {{ticket.assignee.user.email}}
 * {{ticket.assignee.user.externalId}}
-* {{ticket.assignee.user.firstName}}
-* {{ticket.assignee.user.lastName}}
 * {{ticket.assignee.group.id}}
 * {{ticket.assignee.group.name}}
 * {{ticket.custom_field_XXXXXXX}} // XXXXXXX = custom field id
@@ -81,8 +89,6 @@ Below is a list of just a few of the available placeholders.  To see the full li
 * {{currentUser.name}}
 * {{currentUser.email}}
 * {{currentUser.externalId}}
-* {{currentUser.firstName}}
-* {{currentUser.lastName}}
 ```
 
 ## Issues
