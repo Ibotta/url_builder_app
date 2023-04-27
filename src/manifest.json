@@ -9,8 +9,7 @@
   "private": false,
   "location": {
     "support": {
-      "ticket_sidebar": "assets/iframe.html",
-      "new_ticket_sidebar": "assets/iframe.html"
+      "ticket_sidebar": "assets/iframe.html"
     }
   },
   "parameters": [
