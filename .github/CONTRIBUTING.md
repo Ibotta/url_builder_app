@@ -22,21 +22,16 @@ When making a pull request, be sure the merging repo is `ibotta/url_builder_app`
 
 * Do not open an issue on GitHub until you have collected positive feedback about the change. GitHub issues are primarily intended for bug reports and fixes.
 
-# Development Notes
-
 ## Setup
 
 The app is configured to use [Node 18](https://nodejs.org/en/download).  We install node using [asdf-vm](https://asdf-vm.com/).
 
 Once you are setup with Node, you can run `npm install` to get the dependencies ready.
 
-### zcli
+### References
 
-The Zendesk Command Lind Interface is the replacement of the Zendesk Apps Tools (ZAT) CLI and is used to build, test, and package Zendesk apps.  You can find out more [in the Developer Docs](https://developer.zendesk.com/documentation/apps/getting-started/using-zcli/).  
-
-### API Reference
-
-If you are interested in updating or extending the API references, you can check out the [Zendesk API Reference](https://developer.zendesk.com/api-reference/).
+- The Zendesk Command Lind Interface is the replacement of the Zendesk Apps Tools (ZAT) CLI and is used to build, test, and package Zendesk apps.  You can find out more [in the Developer Docs](https://developer.zendesk.com/documentation/apps/getting-started/using-zcli/).  
+- If you are interested in updating or extending the API references, you can check out the [Zendesk API Reference](https://developer.zendesk.com/api-reference/).
 
 ## Testing Changes
 
@@ -50,15 +45,15 @@ npm test
 npm run watch
 ```
 
-In another
+In another terminal:
 ```
 # in the root directory
 zcli apps:server dist
 ```
 
-Navigate to a ticket in your Zendesk instance, and append `?zcli_apps=true` to the URL to load your local version of the app.
+Navigate to a ticket in your Zendesk instance, and append `?zcli_apps=true` to the URL to load your local version of the app.  Any CSS, JS or HTML changes should get picked up by Webpack and reloaded live.  If you need to change the JSON string for URLs, you'll need to restart the `zcli apps:server dist` command.
 
-# Compile and deploy from source
+## Compile and deploy from source
 
 Compiling the app from source uses [zcli](https://developer.zendesk.com/documentation/apps/getting-started/using-zcli/).  Follow the Zendesk docs to get set up and authenticate to your Zendesk instance.  
 
@@ -70,9 +65,9 @@ After authentication, follow these steps to compile and upload the app for the f
 1) `zcli apps:validate dist` -- Validate the app and manifest.
 1) `zcli apps:create dist` -- This will upload the app after validation to your Zendesk Instance.
 
-## Updating the App with zcli
+## Updating the App
 
-To update the app, you can use `zcli apps:update dist` after building.
+To update the app, you can use `zcli apps:update dist` after the initial upload and creation of the app.
 
 ## Generating a ZIP file
 
