@@ -24,7 +24,7 @@ When making a pull request, be sure the merging repo is `ibotta/url_builder_app`
 
 ## Setup
 
-The app is configured to use [Node 18](https://nodejs.org/en/download).  We install node using [asdf-vm](https://asdf-vm.com/).
+The app is configured to use [Node](https://nodejs.org/en/download).  We install node using [mise](https://mise.jdx.dev/).
 
 Once you are setup with Node, you can run `npm install` to get the dependencies ready.
 

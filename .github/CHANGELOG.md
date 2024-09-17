@@ -1,3 +1,8 @@
+## 3.1.0
+- Node 20
+- Dependabot
+- Package updates
+
 ## 3.0.1
 
 Bumping the version in the manifest to match our `package.json` version.  Also rolling in some dependabot updates.
