@@ -1,4 +1,16 @@
+# Changelog
+
+## 4.0.0
+
+- Updated to Bootstrap V4, changed styling from wells to cards
+- Updated numerous dependencies to reduce build warnings and errors.
+- Removed some styling as it seemed unnecessary.
+- Zendesk Marketplace Requirements:
+  - Adding necessary screenshots.
+  - Removing generated Webpack LICENSE file.
+
 ## 3.1.0
+
 - Node 20
 - Dependabot
 - Package updates

@@ -45,7 +45,7 @@ describe('App Initialization', () => {
 
     it('should display an error when no templates are input', () => {
       expect(errorSpy).toBeCalled()
-      expect(document.querySelector('.error')).not.toBe(null)
+      expect(document.querySelector('#error-card')).not.toBe(null)
     })
   })
 

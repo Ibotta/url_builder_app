@@ -6,6 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import dependencies from './package.json' assert { type: 'json' }
 import { TranslationsPlugin } from './webpack/translations-plugin.js'
+import TerserPlugin from 'terser-webpack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,12 +31,12 @@ const zendeskGardenJsDelivrUrl = (function () {
 const externalAssets = {
   css: [
     zendeskGardenJsDelivrUrl,
-    'https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css'
+    'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css'
   ],
   js: [
     'https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js',
     'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
-    'https://cdn.jsdelivr.net/jquery/3.0.0/jquery.min.js'
+    'https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js'
   ]
 }
 export default {
@@ -113,5 +114,17 @@ export default {
       template: './src/templates/iframe.html',
       filename: 'iframe.html'
     })
-  ]
+  ],
+
+  "optimization": {
+    minimize: true,
+    minimizer: [new TerserPlugin({
+        terserOptions: {
+            format: {
+                comments: false,
+            },
+        },
+        extractComments: false,
+    })],
+  },
 }

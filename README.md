@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
-# URL Builder App V3
+# URL Builder App
 
 **NOTE: This app is not currently on the Zendesk Marketplace. ** . Please follow the [Usage Instructions](#usage-instructions) to use this in your Zendesk domain.
 
@@ -10,21 +10,20 @@ A Zendesk App to help you generate links for agents.
 
 ## Dependencies
 ```
-"node": ">=18.12.1",
-"zcli": ">=1.0.0-beta.32"
+"node": ">=20.17.0",
+"@zendesk/zcli": "^1.0.0-beta.51"
 ```
 
 ## Usage 
 ### Deploying from ZIP
 
-To quickly install this application, navigate to the latest releases and download the attached `app-<DATE>.zip`.  You can upload this to Zendesk 
 Attached to the latest release is the `app-<DATE>.zip` asset that can be [uploaded to your Zendesk instance](https://developer.zendesk.com/documentation/apps/getting-started/uploading-and-installing-a-private-app/#uploading-and-installing-a-private-app-in-zendesk):
 
-1. In Admin Center, click the Apps and integrations icon () in the sidebar, then select Apps > Zendesk Support apps.
-2. Click Upload App.
-3. Enter a Name for the app.
-4. Click Choose file and select the zip file for your private app.
-5. Click Save.
+1. In Admin Center, click the Apps and integrations, click Zendesk Support Apps.
+2. Click Upload private app.
+3. Enter the App Name.
+4. Click Choose File and select the zip file.
+5. Click Upload.
 6. In the pop-up box that appears, click Agree and upload this App.
 7. When prompted, click Install.
 
@@ -34,40 +33,44 @@ If you are interested in extending the app or simply building from source, check
 
 ### Changing Settings
 
-Once the app is uploaded, you can Install it to the configured areas of Zendesk.  You can update the JSON array by entering the Zendesk Admin Center > Apps & Integrations > Private Apps > (Whatever you named the app, or URL BuildeR app V3 by default).
+Once the app is uploaded, you can Install it to the configured areas of Zendesk.  You can update the JSON array by entering the Zendesk Admin Center > Apps & Integrations > Private Apps > (Whatever you named the app, or URL Builder App by default).
 
 ### Configuring the JSON Array of URLs
 
-The following is an example of what can be entered into this app's settings:
+To configure the URL buttons, you must supply a JSON array of URLs with `title` and `url` properties.  Here is an example:
 
 ```javascript
 [
-  {
-    "title": "First Title",
-    "url": "http://example.com/?name={{ticket.requester.name}}"
-  },
-  {
-    "title": "Second Title (with custom field)",
-    "url": "http://example.com/?custom={{ticket.custom_field_424242}}"
-  }
+    {
+        "title": "Facebook",
+        "url": "https://www.facebook.com"
+    },
+    {
+        "title": "Instagram",
+        "url": "https://www.instagram.com"
+    },
+    {
+        "title": "Twitter",
+        "url": "https://www.twitter.com"
+    },
+    {
+        "title": "LinkedIn",
+        "url": "https://www.linkedin.com"
+    },
+    {
+        "title": "TikTok",
+        "url": "https://www.tiktok.com"
+    }
 ]
-
-```
-This example will generate the following HTML inside the app:
-```html
-<ul>
-  <li>
-    <a href="http://example.com/?name=Phillip_J_Fry">First Title</a>
-  </li>
-  <li>
-    <a href="http://example.com/?custom=customValue">Second Title (with custom field)</a>
-  </li>
-</ul>
 ```
 
-### Sample Placeholders
+This will yield the following display:
 
-Below is a list of just a few of the available placeholders.  To see the full list of fields, please see the [Zendesk Apps Reference - API Reference](https://developer.zendesk.com/api-reference/apps/introduction/).  You can find fields available to [all locations](https://developer.zendesk.com/api-reference/apps/apps-support-api/all_locations/) and the [ticketsidebar](https://developer.zendesk.com/api-reference/apps/apps-support-api/ticket_sidebar/).
+![social_media_sites](./src/images/screenshot-0.png)
+
+### Using Zendesk Object Properties
+
+Below is a list of just a few of the available object properties available as placeholders. To see the full list of fields, please see the [Zendesk Apps Reference - API Reference](https://developer.zendesk.com/api-reference/apps/introduction/). For example, you can use object properties available in [all locations](https://developer.zendesk.com/api-reference/apps/apps-support-api/all_locations/) and object properties available in the [ticket sidebar](https://developer.zendesk.com/api-reference/apps/apps-support-api/ticket_sidebar/).
 
 ```
 * {{ticket.id}}
@@ -75,23 +78,57 @@ Below is a list of just a few of the available placeholders.  To see the full li
 * {{ticket.requester.id}}
 * {{ticket.requester.name}}
 * {{ticket.requester.email}}
-* {{ticket.requester.externalId}}
 * {{ticket.requester.user_fields.YYY}} = custom user fields can be used
 * {{ticket.assignee.user.id}}
 * {{ticket.assignee.user.name}}
 * {{ticket.assignee.user.email}}
-* {{ticket.assignee.user.externalId}}
-* {{ticket.assignee.group.id}}
-* {{ticket.assignee.group.name}}
 * {{ticket.custom_field_XXXXXXX}} // XXXXXXX = custom field id
 * {{ticket.organization.organization_fields.XXXXXXX}} // XXXXXXX = Field key, default is field name
 * {{currentUser.id}}
 * {{currentUser.name}}
 * {{currentUser.email}}
-* {{currentUser.externalId}}
 ```
 
+Here is an example configuration of a URL button that has the email of the user:
+
+```javascript
+[
+    {
+        "title": "Email User",
+        "url": "mailto:{{ticket.requester.email}}"
+    }
+]
+```
+
+This generates the following button:
+
+We can highlight this button and see the following URL:
+
+![screenshot](./src/images/screenshot-1.png)
+
+### Using Custom Fields in URLs
+
+Zendesk allows for [custom fields](https://support.zendesk.com/hc/en-us/articles/4420210121114-Using-custom-fields) to be added in various places like Users, Tickets, and Organizations for Zendesk Admins.  These custom fields can be used in your URLs as well.  
+
+For example, let's say we use the custom field for the customer like `Issue Topic`, a drop down where they pick their issue type.  When a custom field is created, you will see a column for the `Field ID` generated and you can copy it for the URL. If this object has an ID of `1234567890`, it can be used in a URL like so:
+
+```javascript
+[
+  {
+    "title": "Customer Related Issues",
+    "url": "http://example.com/issues?customer_id={{ticket.requester.id}}&issue_type={{ticket.custom_field_360371540635070}}"
+  }
+]
+```
+
+Given an issue type of "new feature", this would generate a URL with the values set:
+
+![customer_related_issues](./src/images/screenshot-2.png)
+
+An important note here is that URLs generated by custom fields are not updated dynamically.  If the custom field is on the Agent side for example and is updated, the page will need to be refreshed to update the URLs.
+
 ## Issues
+
 To submit an issue, please follow the [available template](/.github/ISSUE_TEMPLATE.md).
 
 ## Contribution

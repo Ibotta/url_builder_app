@@ -24,19 +24,19 @@ const ticketFactory = (useEndpoint = false, ticketDefaults = {}, requesterDefaul
   }
 
   const requester = {
-    externalId: `${faker.datatype.number()}`,
-    id: faker.datatype.number(),
-    name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+    externalId: `${faker.number.int()}`,
+    id: faker.number.int(),
+    name: `${faker.person.firstName()} ${faker.person.lastName()}`,
     ...requesterDefaults
   }
 
-  const assigneeFirstName = faker.name.firstName()
-  const assigneeLastName = faker.name.lastName()
+  const assigneeFirstName = faker.person.firstName()
+  const assigneeLastName = faker.person.lastName()
   const assignee = {
     user: {
       externalId: null,
       firstName: assigneeFirstName,
-      id: faker.datatype.number(),
+      id: faker.number.int(),
       lastName: assigneeLastName,
       name: `${assigneeFirstName} ${assigneeLastName}`,
       ...assigneeUserDefault
@@ -45,10 +45,10 @@ const ticketFactory = (useEndpoint = false, ticketDefaults = {}, requesterDefaul
 
   return {
     ticket: {
-      id: faker.datatype.number(),
+      id: faker.number.int(),
       assignee,
       requester,
-      externalId: `${faker.datatype.number()}`,
+      externalId: `${faker.number.int()}`,
       ...ticketDefaults
     }
   }

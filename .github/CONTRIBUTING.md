@@ -1,4 +1,4 @@
-# How to contribute to the URL Builder App V3
+# How to contribute to the URL Builder App
 
 ## Pull Requests
 
