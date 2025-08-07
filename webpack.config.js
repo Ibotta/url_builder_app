@@ -4,7 +4,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import dependencies from './package.json' assert { type: 'json' }
+import dependencies from './package.json' with { type: 'json' }
 import { TranslationsPlugin } from './webpack/translations-plugin.js'
 import TerserPlugin from 'terser-webpack-plugin';
 
@@ -35,7 +35,6 @@ const externalAssets = {
   ],
   js: [
     'https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js',
-    'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
     'https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js'
   ]
 }
