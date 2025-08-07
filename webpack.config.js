@@ -43,7 +43,6 @@ export default {
   "entry": {
     app: [
       'core-js/stable',
-      'regenerator-runtime/runtime',
       './src/javascripts/locations/ticket_sidebar.js',
       './src/styles/index.css'
     ]
