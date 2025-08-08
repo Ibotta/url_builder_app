@@ -41,7 +41,6 @@ const externalAssets = {
 export default {
   "entry": {
     app: [
-      'core-js/stable',
       './src/javascripts/locations/ticket_sidebar.js',
       './src/styles/index.css'
     ]

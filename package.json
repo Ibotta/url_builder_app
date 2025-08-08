@@ -49,11 +49,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@zendeskgarden/css-bedrock": "^10.0.1",
-    "postcss-advanced-variables": "^5.0.0",
-    "postcss-atroot": "^0.2.4",
-    "postcss-extend-rule": "^4.0.0",
-    "postcss-nested": "^7.0.2",
-    "postcss-property-lookup": "^3.0.0"
+    "@zendeskgarden/css-bedrock": "^10.0.1"
   }
 }
