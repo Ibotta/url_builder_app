@@ -31,7 +31,7 @@ describe('App Initialization', () => {
   let app
 
   describe('Initialization Failure', () => {
-    beforeEach((done) => {
+    beforeEach(async () => {
       jest.spyOn(console, 'error').mockImplementation(() => {})
       document.body.id = 'app'
       document.body.innerHTML = '<section id="main" class="main"><img class="loader" src="spinner.gif"/></section>'
@@ -40,7 +40,7 @@ describe('App Initialization', () => {
       app = new App(APP_DATA)
       errorSpy = jest.spyOn(helpers, 'asyncErrorHandler')
 
-      app.initializePromise.finally(done())
+      await app.initializePromise.finally(() => {})
     })
 
     it('should display an error when no templates are input', () => {
@@ -50,7 +50,7 @@ describe('App Initialization', () => {
   })
 
   describe('Initialization Success', () => {
-    beforeEach((done) => {
+    beforeEach(async () => {
       document.body.id = 'app'
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
       app = new App(APP_DATA)
@@ -62,7 +62,7 @@ describe('App Initialization', () => {
         }
       })
 
-      app.initializePromise.finally(done())
+      await app.initializePromise.finally(() => {})
     })
 
     it('should render main stage with data', () => {

@@ -1,7 +1,7 @@
+/* eslint-disable camelcase */
+
 import { getTicketData, getUserData, getOrganizationData } from '../lib/api.js'
 import client from '../lib/client.js'
-
-const TEMPLATE_OPTIONS = { interpolate: /\{\{(.+?)\}\}/g }
 
 /**
  * Parses the JSON Array of URI Templates from the app's settings.

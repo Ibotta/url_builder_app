@@ -53,8 +53,7 @@ describe('#context', () => {
     it('should throw error when user fetch fails', async () => {
       client.request = jest.fn().mockImplementation(() => Promise.reject(new Error('bad error')))
       const user = currentUserFactory()
-      expect.assertions(1)
-      await processUserObject(user).catch(err => expect(err.message).toMatch('bad error'))
+      await expect(processUserObject(user)).rejects.toThrow('bad error')
     })
   })
 

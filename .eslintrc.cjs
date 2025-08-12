@@ -5,6 +5,9 @@ module.exports = {
     node: true,
     jest: true
   },
+  globals: {
+    ZAFClient: 'readonly'
+  },
   extends: [
     'standard',
     'plugin:jest/recommended'
