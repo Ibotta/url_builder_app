@@ -17,22 +17,22 @@ export class TranslationsPlugin {
     this.options = options
   }
 
-  apply(compiler) {
+  apply (compiler) {
     compiler.hooks.thisCompilation.tap('TranslationsPlugin', (compilation) => {
       compilation.hooks.processAssets.tapAsync(
         {
           name: 'TranslationsPlugin',
-          stage: compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
+          stage: compilation.PROCESS_ASSETS_STAGE_ADDITIONAL
         },
         (assets, callback) => {
           Object.assign(
             assets,
             buildMarketplaceTranslationFile('en.json', this.options.path)
-          );
-          callback();
+          )
+          callback()
         }
-      );
-    });
+      )
+    })
   }
 }
 

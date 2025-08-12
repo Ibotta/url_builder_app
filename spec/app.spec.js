@@ -44,8 +44,8 @@ describe('App Initialization', () => {
     })
 
     it('should display an error when no templates are input', () => {
-      expect(errorSpy).toBeCalled()
-      expect(document.querySelector('#error-card')).not.toBe(null)
+      expect(errorSpy).toHaveBeenCalled()
+      expect(document.querySelector('#error-card')).not.toBeNull()
     })
   })
 
@@ -66,7 +66,7 @@ describe('App Initialization', () => {
     })
 
     it('should render main stage with data', () => {
-      expect(document.querySelector('#well-urls')).not.toBe(null)
+      expect(document.querySelector('#well-urls')).not.toBeNull()
     })
   })
 })

@@ -19,7 +19,8 @@
     "watch": "webpack --watch --mode development",
     "build:dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "lint": "standard",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
     "start": "zcli apps:server dist",
     "validate": "zcli apps:validate dist"
   },
@@ -36,6 +37,8 @@
     "copy-webpack-plugin": "^12.0.2",
     "core-js": "^3.39.0",
     "css-loader": "^7.1.2",
+    "eslint": "^8.57.1",
+    "eslint-plugin-jest": "^29.0.1",
     "html-webpack-plugin": "^5.6.3",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",

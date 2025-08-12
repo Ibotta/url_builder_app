@@ -17,7 +17,7 @@ export function getUrisFromSettings ({ uri_templates }) {
  * @param {Object} context - An object containing user and ticket data.
  */
 // Simple template function using {{key}} replacement
-function simpleTemplate(str, context) {
+function simpleTemplate (str, context) {
   return str.replace(/\{\{(.+?)\}\}/g, (_, key) => {
     return context[key.trim()] ?? ''
   })

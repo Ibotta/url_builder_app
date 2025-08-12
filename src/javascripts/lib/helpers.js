@@ -46,7 +46,7 @@ export function render (replacedNodeSelector, htmlString) {
 export function escapeSpecialChars (str) {
   if (typeof str !== 'string') throw new TypeError('escapeSpecialChars function expects input in type String')
 
-  const escape = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;', '`': '&#x60;', '=': '&#x3D;'}
+  const escape = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;', '`': '&#x60;', '=': '&#x3D;' }
 
   return str.replace(/[&<>"'`=]/g, function (m) { return escape[m] })
 }

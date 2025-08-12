@@ -13,10 +13,10 @@ function getFieldsToWatchFromSettings ({ uri_templates }) {
   return Array.from(new Set(
     JSON.parse(uri_templates)
       .flatMap(uri => {
-        const matches = uri.url.match(/\{\{(.+?)\}\}/g) || [];
-        return matches.map(f => f.slice(2, -2));
+        const matches = uri.url.match(/\{\{(.+?)\}\}/g) || []
+        return matches.map(f => f.slice(2, -2))
       })
-  ));
+  ))
 }
 
 /**
