@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.0
+
+- Updated to Node 22 LTS (v22.18.0)
+- Updated GitHub Actions workflow to use Node 22
+- Updated package.json engines requirement to >=22.18.0
+
 ## 4.0.0
 
 - Updated to Bootstrap V4, changed styling from wells to cards
