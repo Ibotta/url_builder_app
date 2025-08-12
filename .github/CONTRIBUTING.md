@@ -1,74 +1,230 @@
-# How to contribute to the URL Builder App
+# Contributing to URL Builder App
 
-## Pull Requests
+Thank you for your interest in contributing! This guide will help you get started with development and contribution workflows.
 
-When making a pull request, be sure the merging repo is `ibotta/url_builder_app` and not `zendesklabs/url_builder_app`!
+## 🚀 Quick Start for Developers
 
-### **Did you find a bug?**
+### Prerequisites
 
-* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/ibotta/url_builder_app/issues).
+- **Node.js**: `>=22.18.0` (we recommend using [mise](https://mise.jdx.dev/) for version management)
+- **Zendesk CLI**: `@zendesk/zcli@^1.0.0-beta.51`
+- **Zendesk Instance**: Access to a Zendesk instance for testing
 
-* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/ibotta/url_builder_app/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
+### Initial Setup
 
-### **Did you write a patch that fixes a bug?**
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Ibotta/url_builder_app.git
+   cd url_builder_app
+   ```
 
-* Open a new GitHub pull request with the patch.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-* Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
+3. **Run tests**
+   ```bash
+   npm test
+   ```
 
-### **Do you intend to add a new feature or change an existing one?**
+4. **Set up Zendesk CLI** (first time only)
+   ```bash
+   zcli auth:login
+   # Follow prompts to authenticate with your Zendesk instance
+   ```
 
-* Suggest your change as a new issue and start writing code.
+## 🔄 Development Workflow
 
-* Do not open an issue on GitHub until you have collected positive feedback about the change. GitHub issues are primarily intended for bug reports and fixes.
+### Local Development with Live Reload
 
-## Setup
+For the best development experience, use two terminal windows:
 
-The app is configured to use [Node](https://nodejs.org/en/download).  We install node using [mise](https://mise.jdx.dev/).
-
-Once you are setup with Node, you can run `npm install` to get the dependencies ready.
-
-### References
-
-- The Zendesk Command Lind Interface is the replacement of the Zendesk Apps Tools (ZAT) CLI and is used to build, test, and package Zendesk apps.  You can find out more [in the Developer Docs](https://developer.zendesk.com/documentation/apps/getting-started/using-zcli/).  
-- If you are interested in updating or extending the API references, you can check out the [Zendesk API Reference](https://developer.zendesk.com/api-reference/).
-
-## Testing Changes
-
-After you have made local changes, use `npm test` to run tests in Jest.  You can use webpack and `zcli` to test changes and live update the plugin:
-
-In one terminal window:
-```
-# in the root directory
-npm install
-npm test
+**Terminal 1 - Build watcher:**
+```bash
 npm run watch
 ```
 
-In another terminal:
-```
-# in the root directory
+**Terminal 2 - Local server:**
+```bash
 zcli apps:server dist
 ```
 
-Navigate to a ticket in your Zendesk instance, and append `?zcli_apps=true` to the URL to load your local version of the app.  Any CSS, JS or HTML changes should get picked up by Webpack and reloaded live.  If you need to change the JSON string for URLs, you'll need to restart the `zcli apps:server dist` command.
+**Testing your changes:**
+1. Navigate to any ticket in your Zendesk instance
+2. Add `?zcli_apps=true` to the URL
+3. Your local app will load instead of any installed version
+4. Changes to CSS, JS, and HTML are automatically reloaded
+5. For JSON configuration changes, restart the `zcli apps:server` command
 
-## Compile and deploy from source
+### Running Tests
 
-Compiling the app from source uses [zcli](https://developer.zendesk.com/documentation/apps/getting-started/using-zcli/).  Follow the Zendesk docs to get set up and authenticate to your Zendesk instance.  
+```bash
+# Run all tests
+npm test
 
-After authentication, follow these steps to compile and upload the app for the first time:
+# Run tests in watch mode
+npm run test:watch
 
-1) `npm install`
-1) `npm test`
-1) `npm run build` 
-1) `zcli apps:validate dist` -- Validate the app and manifest.
-1) `zcli apps:create dist` -- This will upload the app after validation to your Zendesk Instance.
+# Run tests with coverage
+npm run test:coverage
+```
 
-## Updating the App
+## 🚢 Deployment
 
-To update the app, you can use `zcli apps:update dist` after the initial upload and creation of the app.
+### Building and Packaging
 
-## Generating a ZIP file
+```bash
+# Build the app for production
+npm run build
 
-You can use `zcli apps:package dist` to generate a zip file into `dist/tmp` that you can manually upload.
+# Validate the built app
+zcli apps:validate dist
+
+# Package into a ZIP file
+zcli apps:package dist
+# Creates: dist/tmp/app-<timestamp>.zip
+```
+
+### First-Time Deployment
+
+```bash
+# Deploy to your Zendesk instance
+zcli apps:create dist
+```
+
+### Updating Existing App
+
+```bash
+# Update an already deployed app
+zcli apps:update dist
+```
+
+## 🐛 Reporting Issues
+
+### Before Submitting
+
+- **Search existing issues** in [GitHub Issues](https://github.com/ibotta/url_builder_app/issues)
+- **Check if it's actually a bug** by testing in a clean environment
+
+### Bug Report Template
+
+When creating a bug report, include:
+
+```markdown
+**Environment:**
+- Zendesk instance URL: 
+- Browser: 
+- App version: 
+
+**Expected Behavior:**
+A clear description of what you expected to happen.
+
+**Actual Behavior:**
+A clear description of what actually happened.
+
+**Steps to Reproduce:**
+1. Step one
+2. Step two
+3. Step three
+
+**Configuration:**
+```json
+[your URI templates configuration]
+```
+
+**Screenshots:**
+If applicable, add screenshots to help explain the problem.
+```
+
+## 🔧 Pull Request Process
+
+### Before Submitting
+
+1. **Fork the repository** and create a feature branch
+2. **Write or update tests** for your changes
+3. **Run the test suite** and ensure all tests pass
+4. **Test your changes** in a real Zendesk environment
+5. **Update documentation** if needed
+
+### Pull Request Guidelines
+
+- **Target the correct repository**: `ibotta/url_builder_app` (not `zendesklabs/url_builder_app`)
+- **Write clear commit messages** following conventional commit format
+- **Include a detailed description** of what your changes do
+- **Reference any related issues** using `Fixes #123` or `Closes #123`
+- **Add screenshots** for UI changes
+
+### Example PR Description
+
+```markdown
+## Description
+Brief description of what this PR does.
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Tested locally with `zcli apps:server`
+- [ ] All tests pass (`npm test`)
+- [ ] Tested in real Zendesk environment
+
+## Screenshots
+[If applicable]
+
+Fixes #123
+```
+
+## 🏗️ Architecture Overview
+
+### Project Structure
+
+```
+src/
+├── javascripts/
+│   ├── lib/           # Utilities and helpers
+│   ├── locations/     # Location-specific code
+│   └── modules/       # Core app modules
+├── styles/            # CSS styles
+├── templates/         # HTML templates
+├── translations/      # i18n files
+└── images/           # App assets
+
+spec/                 # Test files
+webpack/              # Build configuration
+```
+
+### Key Files
+
+- **`src/javascripts/modules/app.js`** - Main application logic
+- **`src/javascripts/modules/context.js`** - Data processing and template building
+- **`src/templates/`** - HTML template functions
+- **`src/translations/en.json`** - App metadata and translations
+
+## 📚 Resources
+
+### Zendesk Development
+
+- [Zendesk CLI Documentation](https://developer.zendesk.com/documentation/apps/getting-started/using-zcli/)
+- [Zendesk Apps Framework](https://developer.zendesk.com/documentation/apps/)
+- [Zendesk API Reference](https://developer.zendesk.com/api-reference/)
+
+### Development Tools
+
+- [Node.js](https://nodejs.org/en/download)
+- [mise](https://mise.jdx.dev/) - Runtime version manager
+- [Jest](https://jestjs.io/) - Testing framework
+- [Webpack](https://webpack.js.org/) - Module bundler
+
+## 🤝 Code of Conduct
+
+This project follows the [Contributor Covenant Code of Conduct](code_of_conduct.md). Please read it before contributing.
+
+## ❓ Questions?
+
+- **General questions**: Open a [Discussion](https://github.com/ibotta/url_builder_app/discussions)
+- **Bug reports**: Create an [Issue](https://github.com/ibotta/url_builder_app/issues)
+- **Feature requests**: Start with a Discussion, then create an Issue if there's positive feedback
