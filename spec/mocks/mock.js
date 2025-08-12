@@ -23,7 +23,7 @@ export const CLIENT = {
 export const APP_DATA = {
   metadata: {
     settings: {
-      uri_templates: '[{"title": "Google", "url": "https://google.com/"}, {"title": "Ibotta", "url": "https://ibotta.com/"}]'
+      uriTemplates: '[{"title": "Google", "url": "https://google.com/"}, {"title": "Ibotta", "url": "https://ibotta.com/"}]'
     }
   }
 }
@@ -31,7 +31,7 @@ export const APP_DATA = {
 export const NO_APP_DATA = {
   metadata: {
     settings: {
-      uri_templates: '[]'
+      uriTemplates: '[]'
     }
   }
 }

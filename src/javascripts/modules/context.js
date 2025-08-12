@@ -5,10 +5,10 @@ const TEMPLATE_OPTIONS = { interpolate: /\{\{(.+?)\}\}/g }
 
 /**
  * Parses the JSON Array of URI Templates from the app's settings.
- * @param {Object} uri_templates - URI Templates from app settings
+ * @param {Object} uriTemplates - URI Templates from app settings
  */
-export function getUrisFromSettings ({ uri_templates }) {
-  return JSON.parse(uri_templates)
+export function getUrisFromSettings ({ uriTemplates }) {
+  return JSON.parse(uriTemplates)
 };
 
 /**

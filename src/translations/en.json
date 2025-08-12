@@ -5,7 +5,7 @@
     "long_description": "Generate Buttons from a JSON list of URLs",
     "installation_instructions": "Use the install button",
     "parameters": {
-      "uri_templates": {
+      "uriTemplates": {
         "label": "A JSON Array of URLs.",
         "helpText": "See [our README](https://github.com/Ibotta/url_builder_app/blob/main/README.md) for more information."
       }

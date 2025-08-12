@@ -14,7 +14,7 @@
   },
   "parameters": [
     {
-      "name": "uri_templates",
+      "name": "uriTemplates",
       "type": "multiline",
       "required": true
     }

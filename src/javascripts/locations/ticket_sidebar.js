@@ -7,11 +7,11 @@ let app = {}
 
 /**
  * Retrieves JSON array from app metadata settings, and parses which fields we support.
- * @param {String} uri_templates - String JSON array of URLs with title and URI address.
+ * @param {String} uriTemplates - String JSON array of URLs with title and URI address.
  */
-function getFieldsToWatchFromSettings ({ uri_templates }) {
+function getFieldsToWatchFromSettings ({ uriTemplates }) {
   return Array.from(new Set(
-    JSON.parse(uri_templates)
+    JSON.parse(uriTemplates)
       .flatMap(uri => {
         const matches = uri.url.match(/\{\{(.+?)\}\}/g) || []
         return matches.map(f => f.slice(2, -2))
