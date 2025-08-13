@@ -107,36 +107,6 @@ zcli apps:update dist
 - **Search existing issues** in [GitHub Issues](https://github.com/ibotta/url_builder_app/issues)
 - **Check if it's actually a bug** by testing in a clean environment
 
-### Bug Report Template
-
-When creating a bug report, include:
-
-```markdown
-**Environment:**
-- Zendesk instance URL: 
-- Browser: 
-- App version: 
-
-**Expected Behavior:**
-A clear description of what you expected to happen.
-
-**Actual Behavior:**
-A clear description of what actually happened.
-
-**Steps to Reproduce:**
-1. Step one
-2. Step two
-3. Step three
-
-**Configuration:**
-```json
-[your URI templates configuration]
-```
-
-**Screenshots:**
-If applicable, add screenshots to help explain the problem.
-```
-
 ## 🔧 Pull Request Process
 
 ### Before Submitting
@@ -156,27 +126,6 @@ If applicable, add screenshots to help explain the problem.
 - **Add screenshots** for UI changes
 
 ### Example PR Description
-
-```markdown
-## Description
-Brief description of what this PR does.
-
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation update
-
-## Testing
-- [ ] Tested locally with `zcli apps:server`
-- [ ] All tests pass (`npm test`)
-- [ ] Tested in real Zendesk environment
-
-## Screenshots
-[If applicable]
-
-Fixes #123
-```
 
 ## 🏗️ Architecture Overview
 
@@ -225,6 +174,4 @@ This project follows the [Contributor Covenant Code of Conduct](code_of_conduct.
 
 ## ❓ Questions?
 
-- **General questions**: Open a [Discussion](https://github.com/ibotta/url_builder_app/discussions)
-- **Bug reports**: Create an [Issue](https://github.com/ibotta/url_builder_app/issues)
-- **Feature requests**: Start with a Discussion, then create an Issue if there's positive feedback
+Create an [Issue](https://github.com/ibotta/url_builder_app/issues)
