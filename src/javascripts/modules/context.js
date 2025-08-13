@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* eslint camelcase: ["error", {allow: ["custom_field", "user_fields", "organization_fields"]}] */
 
 import { getTicketData, getUserData, getOrganizationData } from '../lib/api.js'
 import client from '../lib/client.js'
