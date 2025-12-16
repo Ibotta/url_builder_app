@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.2
+- bug fix dot notation processing
+
 ## 4.0.1
 
 - Updating docs, some ai gen commands don't exist

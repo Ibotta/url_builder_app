@@ -19,7 +19,13 @@ export function getUrisFromSettings ({ uriTemplates }) {
 // Simple template function using {{key}} replacement
 function simpleTemplate (str, context) {
   return str.replace(/\{\{(.+?)\}\}/g, (_, key) => {
-    return context[key.trim()] ?? ''
+    const keys = key.trim().split('.')
+    let value = context
+    for (const k of keys) {
+      if (value === undefined || value === null) return ''
+      value = value[k]
+    }
+    return value ?? ''
   })
 }
 
