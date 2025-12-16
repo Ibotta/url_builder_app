@@ -30,7 +30,7 @@
     "@babel/preset-env": "^7.28.0",
     "@babel/runtime-corejs3": "^7.28.2",
     "@faker-js/faker": "^9.9.0",
-    "@zendesk/zcli": "^1.0.0-beta.53",
+    "@zendesk/zcli": "^1.0.0-beta.54",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.2.1",
     "clean-webpack-plugin": "^4.0.0",
