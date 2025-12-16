@@ -1,6 +1,6 @@
 {
   "name": "url_builder_app",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A Zendesk plugin to render URLs",
   "keywords": [
     "zendesk",
