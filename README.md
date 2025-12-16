@@ -4,8 +4,6 @@
 
 # URL Builder App
 
-![main app](./src/images/app.png)
-
 **NOTE: This app is not currently on the Zendesk Marketplace.** Please follow the [Usage Instructions](#usage) to use this in your Zendesk domain.
 
 ## Overview
