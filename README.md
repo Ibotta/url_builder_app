@@ -4,6 +4,8 @@
 
 # URL Builder App
 
+![main app](./src/images/app.png)
+
 **NOTE: This app is not currently on the Zendesk Marketplace.** Please follow the [Usage Instructions](#usage) to use this in your Zendesk domain.
 
 ## Overview
@@ -208,17 +210,6 @@ Zendesk allows [custom fields](https://support.zendesk.com/hc/en-us/articles/442
 ### URLs Don't Update When Fields Change
 - **Cause:** This is expected behavior for performance reasons
 - **Solution:** Refresh the page after making field changes
-
-## Screenshots
-
-![Basic URL buttons](./src/images/screenshot-0.png)
-*Example of basic URL buttons in the ticket sidebar*
-
-![URL with dynamic data](./src/images/screenshot-1.png)
-*Example showing a URL with populated ticket data*
-
-![Custom field example](./src/images/screenshot-2.png)
-*Example using custom fields in URLs*
 
 ## Development
 
