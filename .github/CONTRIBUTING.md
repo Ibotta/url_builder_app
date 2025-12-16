@@ -7,7 +7,7 @@ Thank you for your interest in contributing! This guide will help you get starte
 ### Prerequisites
 
 - **Node.js**: `>=22.18.0` (we recommend using [mise](https://mise.jdx.dev/) for version management)
-- **Zendesk CLI**: `@zendesk/zcli@^1.0.0-beta.51`
+- **Zendesk CLI**: `@zendesk/zcli@^1.0.0-beta.54`
 - **Zendesk Instance**: Access to a Zendesk instance for testing
 
 ### Initial Setup
@@ -30,7 +30,7 @@ Thank you for your interest in contributing! This guide will help you get starte
 
 4. **Set up Zendesk CLI** (first time only)
    ```bash
-   zcli auth:login
+   zcli login
    # Follow prompts to authenticate with your Zendesk instance
    ```
 
@@ -62,12 +62,6 @@ zcli apps:server dist
 ```bash
 # Run all tests
 npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
 ```
 
 ## 🚢 Deployment
@@ -125,8 +119,6 @@ zcli apps:update dist
 - **Reference any related issues** using `Fixes #123` or `Closes #123`
 - **Add screenshots** for UI changes
 
-### Example PR Description
-
 ## 🏗️ Architecture Overview
 
 ### Project Structure
@@ -170,7 +162,7 @@ webpack/              # Build configuration
 
 ## 🤝 Code of Conduct
 
-This project follows the [Contributor Covenant Code of Conduct](code_of_conduct.md). Please read it before contributing.
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). Please read it before contributing.
 
 ## ❓ Questions?
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.1
+
+- Updating docs, some ai gen commands don't exist
+- Update logo back to PNG instead of SVG
+
 ## 4.0.0
 
 - Updated to Bootstrap V4, changed styling from wells to cards

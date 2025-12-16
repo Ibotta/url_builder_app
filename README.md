@@ -1,10 +1,8 @@
 [![Build](https://github.com/Ibotta/url_builder_app/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/Ibotta/url_builder_app/actions/workflows/build.yaml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](.github/CODE_OF_CONDUCT.md)
 
 # URL Builder App
-
-![main app](./src/images/app.png)
 
 **NOTE: This app is not currently on the Zendesk Marketplace.** Please follow the [Usage Instructions](#usage) to use this in your Zendesk domain.
 
@@ -18,19 +16,12 @@ The URL Builder App is a Zendesk Support app that creates dynamic, clickable but
 - **Dynamic URL generation** - URLs automatically populate with current ticket context
 - **Simple configuration** - No coding required, just JSON configuration
 
-## Quick Start
-
-1. **Download** the latest `app-<DATE>.zip` from [Releases](https://github.com/Ibotta/url_builder_app/releases)
-2. **Upload** to your Zendesk instance via Admin Center > Apps and integrations > Upload private app
-3. **Configure** URL templates in the app settings
-4. **Use** the generated buttons in your ticket sidebar
-
 ## Installation
 
 ### Prerequisites
 ```bash
 "node": ">=22.18.0",
-"@zendesk/zcli": "^1.0.0-beta.51"  # Only needed for development
+"@zendesk/zcli": "^1.0.0-beta.54"  # Only needed for development
 ```
 
 ### Option 1: Install from Release (Recommended)
@@ -220,7 +211,6 @@ For developers interested in contributing or modifying the app, see the [Contrib
 ### Getting Help
 
 - **Issues & Bug Reports**: [GitHub Issues](https://github.com/Ibotta/url_builder_app/issues)
-- **General Questions**: [GitHub Discussions](https://github.com/Ibotta/url_builder_app/discussions)
 - **OSS Compliance**: osscompliance@ibotta.com
 
 When reporting issues, please include:
