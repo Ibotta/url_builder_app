@@ -30,7 +30,7 @@ Thank you for your interest in contributing! This guide will help you get starte
 
 4. **Set up Zendesk CLI** (first time only)
    ```bash
-   zcli auth:login
+   zcli login
    # Follow prompts to authenticate with your Zendesk instance
    ```
 
@@ -62,12 +62,6 @@ zcli apps:server dist
 ```bash
 # Run all tests
 npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
 ```
 
 ## 🚢 Deployment
