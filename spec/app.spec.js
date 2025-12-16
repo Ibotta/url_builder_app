@@ -31,7 +31,7 @@ describe('App Initialization', () => {
   let app
 
   describe('Initialization Failure', () => {
-    beforeEach((done) => {
+    beforeEach(async () => {
       jest.spyOn(console, 'error').mockImplementation(() => {})
       document.body.id = 'app'
       document.body.innerHTML = '<section id="main" class="main"><img class="loader" src="spinner.gif"/></section>'
@@ -40,17 +40,17 @@ describe('App Initialization', () => {
       app = new App(APP_DATA)
       errorSpy = jest.spyOn(helpers, 'asyncErrorHandler')
 
-      app.initializePromise.finally(done())
+      await app.initializePromise.finally(() => {})
     })
 
     it('should display an error when no templates are input', () => {
-      expect(errorSpy).toBeCalled()
-      expect(document.querySelector('.error')).not.toBe(null)
+      expect(errorSpy).toHaveBeenCalled()
+      expect(document.querySelector('#error-card')).not.toBeNull()
     })
   })
 
   describe('Initialization Success', () => {
-    beforeEach((done) => {
+    beforeEach(async () => {
       document.body.id = 'app'
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
       app = new App(APP_DATA)
@@ -62,11 +62,11 @@ describe('App Initialization', () => {
         }
       })
 
-      app.initializePromise.finally(done())
+      await app.initializePromise.finally(() => {})
     })
 
     it('should render main stage with data', () => {
-      expect(document.querySelector('#well-urls')).not.toBe(null)
+      expect(document.querySelector('#well-urls')).not.toBeNull()
     })
   })
 })

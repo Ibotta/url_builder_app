@@ -13,41 +13,17 @@
   height: 25%;
 }
 
-.error {
-  display: block;
-  margin: auto;
-  text-align: center;
-  color: rgb(0, 0, 0);
-  overflow-y: hidden;
-}
-
-.error > img {
-  width: 25%;
-  height: 25%;
-}
-
-.btn-url {
-  width: 100%;
+.urls {
   color: #2F3941;
   background-color: #ffffff;
   background-image: none;
   white-space: nowrap;
   font-weight: 600;
+  width: auto;
 }
 
-.btn-list {
+.url-list {
   text-align: center;
-  width: 90%;
-  margin: auto;
-}
-
-#app {
-  height: 100%;
-  overflow: hidden;
-}
-
-html {
-  overflow: hidden;
 }
 
 ul {  

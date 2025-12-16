@@ -17,15 +17,21 @@ export class TranslationsPlugin {
     this.options = options
   }
 
-  // Defines `apply` method in it's prototype.
   apply (compiler) {
-    // Specifies webpack's event hook to attach itself.
-    compiler.hooks.emit.tapAsync('TranslationsPlugin', (compilation, callback) => {
-      Object.assign(
-        compilation.assets,
-        buildMarketplaceTranslationFile('en.json', this.options.path)
+    compiler.hooks.thisCompilation.tap('TranslationsPlugin', (compilation) => {
+      compilation.hooks.processAssets.tapAsync(
+        {
+          name: 'TranslationsPlugin',
+          stage: compilation.PROCESS_ASSETS_STAGE_ADDITIONAL
+        },
+        (assets, callback) => {
+          Object.assign(
+            assets,
+            buildMarketplaceTranslationFile('en.json', this.options.path)
+          )
+          callback()
+        }
       )
-      callback()
     })
   }
 }

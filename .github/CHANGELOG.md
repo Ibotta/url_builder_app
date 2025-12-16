@@ -1,4 +1,16 @@
+# Changelog
+
+## 4.0.0
+
+- Updated to Bootstrap V4, changed styling from wells to cards
+- Updated numerous dependencies to reduce build warnings and errors.
+- Removed dependencies like some PostCSS plugins, Lodash
+- Removed some styling as it seemed unnecessary.
+- Updated to Node 22 LTS (v22.18.0)
+- ESLint changes
+
 ## 3.1.0
+
 - Node 20
 - Dependabot
 - Package updates

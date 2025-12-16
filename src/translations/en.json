@@ -1,13 +1,13 @@
 {
   "app": {
-    "name": "URL Builder App V3",
-    "short_description": "Generate Buttons from a list of URLs",
-    "long_description": "Generate Buttons from a list of URLs",
-    "installation_instructions": "Use the install button",
+    "name": "URL Builder App",
+    "short_description": "Generate Buttons from a JSON list of URLs",
+    "long_description": "### Streamline Agent Workflows with Custom URL Buttons  \\n\\nThe URL Builder App empowers your support agents by creating custom clickable buttons directly in the Zendesk ticket sidebar. Transform static URLs into dynamic, context-aware links that automatically populate with ticket and user data.  \\n\\n**Key Features:**  \\n* Create unlimited custom URL buttons with personalized titles  \\n* Use Zendesk placeholders to dynamically insert ticket data, user information, and custom fields  \\n* Perfect for integrating with external tools, CRMs, knowledge bases, or any web service  \\n* Simple JSON configuration - no coding required  \\n* Works seamlessly in the ticket sidebar for quick agent access  \\n\\n**Common Use Cases:**  \\n* Link to customer profiles in your CRM using {{ticket.requester.email}}  \\n* Open support tickets in external systems with {{ticket.id}}  \\n* Create mailto links with {{ticket.requester.email}}  \\n* Generate search URLs with customer data  \\n* Connect to internal tools and knowledge bases  \\n\\nBoost your team's efficiency by eliminating manual copy-pasting and providing instant access to relevant external resources. Get started by configuring your first URL template in the app settings.",
+    "installation_instructions": "### Installation Steps  \\n\\n1. **Install the App**  \\n   - In Zendesk Admin Center, go to **Apps and integrations** > **Zendesk Support Apps**  \\n   - Click **Upload private app**  \\n   - Choose the app file and click **Upload**  \\n   - Click **Install** when prompted  \\n\\n2. **Configure URL Templates**  \\n   - After installation, go back to **Apps and integrations** > **Zendesk Support Apps**  \\n   - Find your app in the **Private Apps** section and click the **Settings** gear icon  \\n   - In the **URI Templates** field, enter a JSON array of your desired URLs  \\n\\n3. **Example Configuration**  \\n```json  \\n[  \\n  {  \\n    \\\"title\\\": \\\"Email Customer\\\",  \\n    \\\"url\\\": \\\"mailto:{{ticket.requester.email}}\\\"  \\n  },  \\n  {  \\n    \\\"title\\\": \\\"View Customer Profile\\\",  \\n    \\\"url\\\": \\\"https://yourcrm.com/customer/{{ticket.requester.email}}\\\"  \\n  }  \\n]  \\n```  \\n\\n4. **Save and Test**  \\n   - Click **Save** to apply your configuration  \\n   - Open any ticket to see your custom URL buttons in the sidebar  \\n\\n**Need Help?** Visit our [GitHub repository](https://github.com/Ibotta/url_builder_app) for detailed documentation and examples.",
     "parameters": {
-      "uri_templates": {
+      "uriTemplates": {
         "label": "A JSON Array of URLs.",
-        "helpText": "See [our README](https://github.com/Ibotta/url_builder_app/blob/master/README.md) for more information."
+        "helpText": "See [our README](https://github.com/Ibotta/url_builder_app/blob/main/README.md) for more information."
       }
     }
   },

@@ -1,15 +1,14 @@
+/* eslint camelcase: ["error", {allow: ["custom_field", "user_fields", "organization_fields"]}] */
+
 import { getTicketData, getUserData, getOrganizationData } from '../lib/api.js'
 import client from '../lib/client.js'
-import _ from 'lodash'
-
-const TEMPLATE_OPTIONS = { interpolate: /\{\{(.+?)\}\}/g }
 
 /**
  * Parses the JSON Array of URI Templates from the app's settings.
- * @param {Object} uri_templates - URI Templates from app settings
+ * @param {Object} uriTemplates - URI Templates from app settings
  */
-export function getUrisFromSettings ({ uri_templates }) {
-  return JSON.parse(uri_templates)
+export function getUrisFromSettings ({ uriTemplates }) {
+  return JSON.parse(uriTemplates)
 };
 
 /**
@@ -17,11 +16,17 @@ export function getUrisFromSettings ({ uri_templates }) {
  * @param {Array} uris - An array of JSON URI Objects, with a title and URIs.  The URIs have placeholders (See README).
  * @param {Object} context - An object containing user and ticket data.
  */
-export function buildTemplatesFromContext (uris, context) {
-  return _.map(uris, uri => {
-    uri.url = _.template(uri.url, TEMPLATE_OPTIONS)(context)
-    uri.title = _.template(uri.title, TEMPLATE_OPTIONS)(context)
+// Simple template function using {{key}} replacement
+function simpleTemplate (str, context) {
+  return str.replace(/\{\{(.+?)\}\}/g, (_, key) => {
+    return context[key.trim()] ?? ''
+  })
+}
 
+export function buildTemplatesFromContext (uris, context) {
+  return uris.map(uri => {
+    uri.url = simpleTemplate(uri.url, context)
+    uri.title = simpleTemplate(uri.title, context)
     return uri
   })
 }

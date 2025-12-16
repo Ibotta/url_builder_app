@@ -38,7 +38,7 @@ describe('i18n', () => {
 
     it('returns null if the file doesn\'t exist', () => {
       const result = i18n.tryRequire('fr')
-      expect(result).toBe(null)
+      expect(result).toBeNull()
     })
   })
 

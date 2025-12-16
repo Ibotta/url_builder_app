@@ -14,7 +14,7 @@ function mockGetTemplate (item) {
 
 describe('resizeContainer', () => {
   it('client.invoke has been called', () => {
-    const clientSpy = jest.spyOn(client, 'invoke');
+    const clientSpy = jest.spyOn(client, 'invoke')
     resizeContainer()
     expect(clientSpy).toHaveBeenCalled()
   })
@@ -33,11 +33,11 @@ describe('templatingLoop', () => {
 describe('render', () => {
   it('should replace target dom node with the given HTML string', () => {
     document.body.innerHTML = '<div id="placeholder"></div>'
-    expect(document.querySelectorAll('#placeholder').length).toBe(1)
+    expect(document.querySelectorAll('#placeholder')).toHaveLength(1)
 
     render('#placeholder', '<div id="app"></div>')
-    expect(document.querySelectorAll('#placeholder').length).toBe(0)
-    expect(document.querySelectorAll('#app').length).toBe(1)
+    expect(document.querySelectorAll('#placeholder')).toHaveLength(0)
+    expect(document.querySelectorAll('#app')).toHaveLength(1)
   })
 })
 

@@ -1,5 +1,5 @@
 {
-  "name": "URL Builder App V3",
+  "name": "URL Builder App",
   "author": {
     "name": "Ibotta, Inc.",
     "email": "osscompliance@ibotta.com",
@@ -14,11 +14,11 @@
   },
   "parameters": [
     {
-      "name": "uri_templates",
+      "name": "uriTemplates",
       "type": "multiline",
       "required": true
     }
   ],
-  "version": "3.1.0",
+  "version": "4.0.0",
   "frameworkVersion": "2.0"
 }

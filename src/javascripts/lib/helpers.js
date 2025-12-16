@@ -21,9 +21,7 @@ export function resizeContainer (max = Number.POSITIVE_INFINITY) {
  * @return {String} final template
  */
 export function templatingLoop (set, getTemplate, initialValue = '') {
-  return set.reduce((accumulator, item, index) => {
-    return `${accumulator}${getTemplate(item, index)}`
-  }, initialValue)
+  return set.reduce((accumulator, item, index) => `${accumulator}${getTemplate(item, index)}`, initialValue)
 }
 
 /**
@@ -48,15 +46,7 @@ export function render (replacedNodeSelector, htmlString) {
 export function escapeSpecialChars (str) {
   if (typeof str !== 'string') throw new TypeError('escapeSpecialChars function expects input in type String')
 
-  const escape = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#x27;',
-    '`': '&#x60;',
-    '=': '&#x3D;'
-  }
+  const escape = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;', '`': '&#x60;', '=': '&#x3D;' }
 
   return str.replace(/[&<>"'`=]/g, function (m) { return escape[m] })
 }
