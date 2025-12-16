@@ -124,4 +124,10 @@ export default {
         extractComments: false,
     })],
   },
+  
+  performance: {
+    hints: 'warning',
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  }
 }
