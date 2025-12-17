@@ -6,9 +6,33 @@ import client from '../lib/client.js'
 /**
  * Parses the JSON Array of URI Templates from the app's settings.
  * @param {Object} uriTemplates - URI Templates from app settings
+ * @throws {Error} If JSON is invalid or doesn't meet required structure
  */
 export function getUrisFromSettings ({ uriTemplates }) {
-  return JSON.parse(uriTemplates)
+  try {
+    const parsed = JSON.parse(uriTemplates)
+    
+    if (!Array.isArray(parsed)) {
+      throw new Error('URI templates must be a JSON array')
+    }
+    
+    parsed.forEach((uri, index) => {
+      if (!uri.title || typeof uri.title !== 'string') {
+        throw new Error(`URI at index ${index} missing required 'title' property`)
+      }
+      if (!uri.url || typeof uri.url !== 'string') {
+        throw new Error(`URI at index ${index} missing required 'url' property`)
+      }
+    })
+    
+    console.log('[URL Builder] Parsed URI templates:', parsed)
+    return parsed
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      throw new Error(`Invalid JSON in URI templates: ${error.message}`)
+    }
+    throw error
+  }
 };
 
 /**
@@ -16,25 +40,84 @@ export function getUrisFromSettings ({ uriTemplates }) {
  * @param {Array} uris - An array of JSON URI Objects, with a title and URIs.  The URIs have placeholders (See README).
  * @param {Object} context - An object containing user and ticket data.
  */
-// Simple template function using {{key}} replacement
+// Simple template function using {{key}} replacement with support for nested properties
 function simpleTemplate (str, context) {
-  return str.replace(/\{\{(.+?)\}\}/g, (_, key) => {
+  const unresolvedFields = []
+  
+  const result = str.replace(/\{\{(.+?)\}\}/g, (match, key) => {
     const keys = key.trim().split('.')
     let value = context
+    
     for (const k of keys) {
-      if (value === undefined || value === null) return ''
+      if (value === undefined || value === null) {
+        unresolvedFields.push(key.trim())
+        return match // Return the original placeholder
+      }
       value = value[k]
     }
-    return value ?? ''
+    
+    if (value === undefined || value === null) {
+      unresolvedFields.push(key.trim())
+      return match // Return the original placeholder
+    }
+    
+    return value
   })
+  
+  return { result, unresolvedFields }
 }
 
 export function buildTemplatesFromContext (uris, context) {
-  return uris.map(uri => {
-    uri.url = simpleTemplate(uri.url, context)
-    uri.title = simpleTemplate(uri.title, context)
-    return uri
+  console.log('[URL Builder] Building templates with context:', JSON.stringify(context, null, 2))
+  
+  const errors = []
+  
+  const processedUris = uris.map((uri, index) => {
+    const urlResult = simpleTemplate(uri.url, context)
+    const titleResult = simpleTemplate(uri.title, context)
+    
+    // Check for unresolved placeholders
+    const allUnresolved = [...new Set([...urlResult.unresolvedFields, ...titleResult.unresolvedFields])]
+    
+    if (allUnresolved.length > 0) {
+      errors.push({
+        index,
+        title: uri.title,
+        unresolvedFields: allUnresolved
+      })
+    }
+    
+    // Check for malformed URLs (double slashes, missing segments)
+    const url = urlResult.result
+    if (url.includes('///') || (url.includes('//') && !/^https?:\/\//.test(url))) {
+      errors.push({
+        index,
+        title: uri.title,
+        error: 'Malformed URL detected (missing path segments)'
+      })
+    }
+    
+    return {
+      ...uri,
+      url: urlResult.result,
+      title: titleResult.result
+    }
   })
+  
+  if (errors.length > 0) {
+    console.error('[URL Builder] Template processing errors:', errors)
+    const errorMessages = errors.map(e => {
+      if (e.unresolvedFields) {
+        return `"${e.title}": Failed to resolve fields: ${e.unresolvedFields.map(f => `{{${f}}}`).join(', ')}`
+      }
+      return `"${e.title}": ${e.error}`
+    }).join('\n')
+    
+    throw new Error(`Unable to build URLs due to unresolved placeholders or malformed URLs:\n${errorMessages}\n\nPlease check that all required ticket fields are available.`)
+  }
+  
+  console.log('[URL Builder] Successfully processed URIs:', processedUris)
+  return processedUris
 }
 
 /**
@@ -46,9 +129,14 @@ export function buildTemplatesFromContext (uris, context) {
 export function assignTicketFields (ticket, ticketFields) {
   const ticketCopy = Object.assign({}, ticket)
 
-  ticketFields.ticket.custom_fields.forEach(custom_field => {
-    ticketCopy[`custom_field_${custom_field.id}`] = custom_field.value
-  })
+  if (ticketFields?.ticket?.custom_fields && Array.isArray(ticketFields.ticket.custom_fields)) {
+    console.log('[URL Builder] Processing custom fields:', ticketFields.ticket.custom_fields)
+    ticketFields.ticket.custom_fields.forEach(custom_field => {
+      ticketCopy[`custom_field_${custom_field.id}`] = custom_field.value
+    })
+  } else {
+    console.warn('[URL Builder] No custom fields found in ticket data')
+  }
 
   return ticketCopy
 }
@@ -58,14 +146,40 @@ export function assignTicketFields (ticket, ticketFields) {
  * @param {Object} user - assignee, requester, or current user objects.
  */
 export async function processUserObject (user) {
-  const [firstName = '', lastName = ''] = (user.name || '').split(' ')
-  const { user: { user_fields } } = await client.request(getUserData(user.id))
-
-  return {
-    ...user,
-    firstName,
-    lastName,
-    user_fields
+  if (!user) {
+    console.warn('[URL Builder] processUserObject called with null/undefined user')
+    return null
+  }
+  
+  // Handle case where user is wrapped in a { currentUser: {...} } object (from tests/factories)
+  const actualUser = user.currentUser || user
+  
+  const [firstName = '', lastName = ''] = (actualUser.name || '').split(' ')
+  
+  // If user has no ID, we can't fetch user_fields, but still return the user with name parts
+  if (!actualUser.id) {
+    console.warn('[URL Builder] User has no ID, returning user with name parts only:', actualUser)
+    return {
+      ...actualUser,
+      firstName,
+      lastName,
+      user_fields: {}
+    }
+  }
+  
+  try {
+    const { user: { user_fields } } = await client.request(getUserData(actualUser.id))
+    
+    return {
+      ...actualUser,
+      firstName,
+      lastName,
+      user_fields
+    }
+  } catch (error) {
+    console.error(`[URL Builder] Error fetching user fields for user ${actualUser.id}:`, error)
+    // Re-throw the error so calling code can handle it
+    throw error
   }
 }
 
@@ -84,11 +198,25 @@ export async function getContext () {
     context.ticket = ticket
 
     if (ticket.requester) {
-      context.ticket.requester = await processUserObject(ticket.requester)
+      const processedRequester = await processUserObject(ticket.requester)
+      if (processedRequester) {
+        context.ticket.requester = processedRequester
+      } else {
+        console.warn('[URL Builder] Failed to process requester, requester data may be incomplete')
+      }
+    } else {
+      console.warn('[URL Builder] Ticket has no requester')
     }
 
-    if (ticket.assignee.user) {
-      context.ticket.assignee.user = await processUserObject(ticket.assignee.user)
+    if (ticket.assignee?.user) {
+      const processedAssignee = await processUserObject(ticket.assignee.user)
+      if (processedAssignee) {
+        context.ticket.assignee.user = processedAssignee
+      } else {
+        console.warn('[URL Builder] Failed to process assignee, assignee data may be incomplete')
+      }
+    } else {
+      console.warn('[URL Builder] Ticket has no assignee')
     }
 
     context.currentUser = await processUserObject(currentUser)
@@ -98,8 +226,11 @@ export async function getContext () {
 
   const { currentUser } = await client.get('currentUser')
   let { ticket } = await client.get('ticket')
+  
+  console.log('[URL Builder] ZAFClient ticket data:', JSON.stringify(ticket, null, 2))
 
   const ticketFields = await client.request(getTicketData(ticket.id))
+  console.log('[URL Builder] API ticket fields data:', JSON.stringify(ticketFields, null, 2))
 
   /**
    * Ticket organization is based on the nature of how the ticket was created.
@@ -124,5 +255,8 @@ export async function getContext () {
 
   ticket = assignTicketFields(ticket, ticketFields)
 
-  return await buildContext(ticket, currentUser)
+  const finalContext = await buildContext(ticket, currentUser)
+  console.log('[URL Builder] Final context object:', JSON.stringify(finalContext, null, 2))
+  
+  return finalContext
 }
