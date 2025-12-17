@@ -1,7 +1,7 @@
 # Changelog
 
 ## 4.0.2
-- bug fix dot notation processing for our ticket fields
+- bug fix dot notation processing for ticket fields
 - add relevant error handling
 - support dark mode
 
