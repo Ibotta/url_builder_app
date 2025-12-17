@@ -147,16 +147,13 @@ export async function processUserObject (user) {
     return null
   }
   
-  // Handle case where user is wrapped in a { currentUser: {...} } object (from tests/factories)
-  const actualUser = user.currentUser || user
-  
-  const [firstName = '', lastName = ''] = (actualUser.name || '').split(' ')
+  const [firstName = '', lastName = ''] = (user.name || '').split(' ')
   
   // If user has no ID, we can't fetch user_fields, but still return the user with name parts
-  if (!actualUser.id) {
-    console.warn('[URL Builder] User has no ID, returning user with name parts only:', actualUser)
+  if (!user.id) {
+    console.warn('[URL Builder] User has no ID, returning user with name parts only:', user)
     return {
-      ...actualUser,
+      ...user,
       firstName,
       lastName,
       user_fields: {}
@@ -164,16 +161,16 @@ export async function processUserObject (user) {
   }
   
   try {
-    const { user: { user_fields } } = await client.request(getUserData(actualUser.id))
+    const { user: { user_fields } } = await client.request(getUserData(user.id))
     
     return {
-      ...actualUser,
+      ...user,
       firstName,
       lastName,
       user_fields
     }
   } catch (error) {
-    console.error(`[URL Builder] Error fetching user fields for user ${actualUser.id}:`, error)
+    console.error(`[URL Builder] Error fetching user fields for user ${user.id}:`, error)
     // Re-throw the error so calling code can handle it
     throw error
   }
