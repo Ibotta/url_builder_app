@@ -5,7 +5,6 @@
 export function setTheme (scheme) {
   if (scheme === 'light' || scheme === 'dark') {
     document.documentElement.setAttribute('data-theme', scheme)
-    console.log(`[URL Builder] Theme set to: ${scheme}`)
   } else {
     console.warn(`[URL Builder] Invalid theme scheme: ${scheme}`)
   }

@@ -25,7 +25,6 @@ export function getUrisFromSettings ({ uriTemplates }) {
       }
     })
     
-    console.log('[URL Builder] Parsed URI templates:', parsed)
     return parsed
   } catch (error) {
     if (error instanceof SyntaxError) {
@@ -68,7 +67,6 @@ function simpleTemplate (str, context) {
 }
 
 export function buildTemplatesFromContext (uris, context) {
-  console.log('[URL Builder] Building templates with context:', JSON.stringify(context, null, 2))
   
   const errors = []
   
@@ -116,7 +114,6 @@ export function buildTemplatesFromContext (uris, context) {
     throw new Error(`Unable to build URLs due to unresolved placeholders or malformed URLs:\n${errorMessages}\n\nPlease check that all required ticket fields are available.`)
   }
   
-  console.log('[URL Builder] Successfully processed URIs:', processedUris)
   return processedUris
 }
 
@@ -130,7 +127,6 @@ export function assignTicketFields (ticket, ticketFields) {
   const ticketCopy = Object.assign({}, ticket)
 
   if (ticketFields?.ticket?.custom_fields && Array.isArray(ticketFields.ticket.custom_fields)) {
-    console.log('[URL Builder] Processing custom fields:', ticketFields.ticket.custom_fields)
     ticketFields.ticket.custom_fields.forEach(custom_field => {
       ticketCopy[`custom_field_${custom_field.id}`] = custom_field.value
     })
@@ -227,10 +223,8 @@ export async function getContext () {
   const { currentUser } = await client.get('currentUser')
   let { ticket } = await client.get('ticket')
   
-  console.log('[URL Builder] ZAFClient ticket data:', JSON.stringify(ticket, null, 2))
 
   const ticketFields = await client.request(getTicketData(ticket.id))
-  console.log('[URL Builder] API ticket fields data:', JSON.stringify(ticketFields, null, 2))
 
   /**
    * Ticket organization is based on the nature of how the ticket was created.
@@ -256,7 +250,6 @@ export async function getContext () {
   ticket = assignTicketFields(ticket, ticketFields)
 
   const finalContext = await buildContext(ticket, currentUser)
-  console.log('[URL Builder] Final context object:', JSON.stringify(finalContext, null, 2))
   
   return finalContext
 }

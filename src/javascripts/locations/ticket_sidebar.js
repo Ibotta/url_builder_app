@@ -51,7 +51,6 @@ client.on('app.registered', function (appData) {
  * Event listener for color scheme changes (theme switching)
  */
 client.on('colorScheme.changed', function (colorScheme) {
-  console.log('[URL Builder] Color scheme changed to:', colorScheme)
   setTheme(colorScheme)
 })
 
