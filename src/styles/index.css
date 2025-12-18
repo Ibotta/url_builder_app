@@ -1,9 +1,22 @@
 @import '@zendeskgarden/css-bedrock';
 
+/* Theme CSS Variables - Zendesk Garden Semantic Colors */
+[data-theme="light"] {
+  --background-default: rgb(255, 255, 255);
+  --foreground-default: rgb(41, 50, 57);
+}
+
+[data-theme="dark"] {
+  --background-default: rgb(21, 26, 30);
+  --foreground-default: rgb(216, 220, 222);
+}
+
 .main {
   height: 100%;
   min-height: 100%;
   vertical-align: middle;
+  background-color: var(--background-default);
+  color: var(--foreground-default);
 }
 
 .loader {
@@ -14,12 +27,19 @@
 }
 
 .urls {
-  color: #2F3941;
-  background-color: #ffffff;
+  color: var(--foreground-default);
+  background-color: var(--background-default);
   background-image: none;
   white-space: nowrap;
   font-weight: 600;
   width: auto;
+  border: 1px solid var(--foreground-default);
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.urls:hover {
+  opacity: 1;
 }
 
 .url-list {

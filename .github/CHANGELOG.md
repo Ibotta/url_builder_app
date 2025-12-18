@@ -1,11 +1,20 @@
 # Changelog
 
+## 4.0.2
+- bug fix dot notation processing for ticket fields
+- add relevant error handling
+- support dark mode
+
 ## 4.0.1
+
+⚠️ **WARNING: Do not use this version. Upgrade to 4.0.2 due to a bug in ticket field processing.**
 
 - Updating docs, some ai gen commands don't exist
 - Update logo back to PNG instead of SVG
 
 ## 4.0.0
+
+⚠️ **WARNING: Do not use this version. Upgrade to 4.0.2 due to a bug in ticket field processing.**
 
 - Updated to Bootstrap V4, changed styling from wells to cards
 - Updated numerous dependencies to reduce build warnings and errors.

@@ -3,11 +3,19 @@ import { faker } from '@faker-js/faker'
  * Generates a Zendesk Current User object with random values
  * Randomly generated values are overidable through default params
  *
- * @param {*} ticketDefaults - Object to override the entire current user object
+ * @param {*} useEndpoint - If true, returns format for API endpoint response; if false, returns user object directly
+ * @param {*} currentUserDefaults - Object to override the user object properties
  *
  * @returns a new random Zendesk current user object
  */
 const currentUserFactory = (useEndpoint = false, currentUserDefaults = {}) => {
+  const userObject = {
+    externalId: null,
+    id: faker.number.int(),
+    name: `${faker.person.firstName()} ${faker.person.lastName()}`,
+    ...currentUserDefaults
+  }
+  
   if (useEndpoint) {
     return {
       user: {
@@ -20,14 +28,9 @@ const currentUserFactory = (useEndpoint = false, currentUserDefaults = {}) => {
       }
     }
   }
-  return {
-    currentUser: {
-      externalId: null,
-      id: faker.number.int(),
-      name: `${faker.person.firstName()} ${faker.person.lastName()}`,
-      ...currentUserDefaults
-    }
-  }
+  
+  // Return just the user object (no wrapper) to match how it's used in processUserObject
+  return userObject
 }
 
 export default currentUserFactory

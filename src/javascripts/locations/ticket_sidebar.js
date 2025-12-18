@@ -1,6 +1,15 @@
 import App from '../modules/app.js'
+import { setTheme } from '../lib/theme.js'
 
 /* global ZAFClient */
+
+// Initialize theme from URL query parameter before ZAF client loads
+const queryParams = new URLSearchParams(window.location.search)
+const colorScheme = queryParams.get('colorScheme')
+if (colorScheme) {
+  setTheme(colorScheme)
+}
+
 const client = ZAFClient.init()
 let fieldsToWatch = []
 let app = {}
@@ -26,7 +35,23 @@ client.on('app.registered', function (appData) {
   app = appData
   fieldsToWatch = getFieldsToWatchFromSettings(appData.metadata.settings)
 
+  // Get initial color scheme from ZAF client (backup if query param wasn't available)
+  client.get('colorScheme').then(data => {
+    if (data.colorScheme) {
+      setTheme(data.colorScheme)
+    }
+  }).catch(err => {
+    console.warn('[URL Builder] Could not get colorScheme:', err)
+  })
+
   return new App(appData)
+})
+
+/**
+ * Event listener for color scheme changes (theme switching)
+ */
+client.on('colorScheme.changed', function (colorScheme) {
+  setTheme(colorScheme)
 })
 
 /**

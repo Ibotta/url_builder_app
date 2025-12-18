@@ -59,7 +59,14 @@ describe('#context', () => {
 
   describe('#getContext', () => {
     it('should retrieve the ticket context with user information', async () => {
-      client.get = jest.fn().mockImplementation(async () => ({ ...ticketFactory(), ...currentUserFactory() }))
+      const ticketData = ticketFactory()
+      
+      client.get = jest.fn().mockImplementation(async (key) => {
+        if (key === 'currentUser') {
+          return { currentUser: currentUserFactory() }
+        }
+        return ticketData
+      })
 
       client.request = jest.fn().mockImplementation(async ({ url }) => {
         if (url.includes('users')) {

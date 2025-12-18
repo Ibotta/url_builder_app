@@ -36,6 +36,12 @@ describe('App Initialization', () => {
       document.body.id = 'app'
       document.body.innerHTML = '<section id="main" class="main"><img class="loader" src="spinner.gif"/></section>'
 
+      client.get = jest.fn().mockImplementation(async (key) => {
+        if (key === 'currentUser') {
+          return { currentUser: mockCurrentUser() }
+        }
+        return { ticket: mockTicket() }
+      })
       client.request = jest.fn().mockReturnValueOnce(Promise.reject(new Error('a fake error')))
       app = new App(APP_DATA)
       errorSpy = jest.spyOn(helpers, 'asyncErrorHandler')
@@ -54,6 +60,12 @@ describe('App Initialization', () => {
       document.body.id = 'app'
       document.body.innerHTML = '<section><img class="loader" src="spinner.gif"/></section>'
       app = new App(APP_DATA)
+      client.get = jest.fn().mockImplementation(async (key) => {
+        if (key === 'currentUser') {
+          return { currentUser: mockCurrentUser() }
+        }
+        return { ticket: mockTicket() }
+      })
       client.request = jest.fn().mockImplementation(async ({ url }) => {
         if (url.includes('user')) {
           return mockCurrentUser(true)
